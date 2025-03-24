@@ -1,0 +1,57 @@
+{
+  "eten": [
+    {
+      "name": "opgeklopte stofzuiger",
+      "img": "opgeklopte stofzuiger.png",
+      "description": "Een Gerecht gemaakt uit een Dyson stofzuigerroom",
+      "filter": [
+        "milk",
+        "animal"
+      ]
+    },
+    {
+      "name": "lang vlees",
+      "img": "lang vlees.png",
+      "description": "een stuk dood dier",
+      "filter": [
+        "animal",
+        "vlees"
+      ]
+    }
+  ],
+  "drinken": [
+    {
+      "name": "melk",
+      "img": "melk.png",
+      "description": "Melk",
+      "filter": [
+        "milk"
+      ]
+    },
+    {
+      "name": "water",
+      "img": "water.png",
+      "description": "kraan water",
+      "filter": []
+    }
+  ],
+  "na-gerechten": [
+    {
+      "name": "Zwartzschwalder Kirschen Torte",
+      "img": "Zwartzschwalder Kirschen Torte.png",
+      "description": "kersen chocoladetaart",
+      "filter": [
+        "milk",
+        "animal"
+      ]
+    },
+    {
+      "name": "Coke",
+      "img": "Coke.png",
+      "description": "Cocaine in een colafles",
+      "filter": [
+        "animal"
+      ]
+    }
+  ]
+}
