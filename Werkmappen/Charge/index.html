@@ -1,13 +1,33 @@
-<!doctype html>
-<html lang="NL">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Werkmap Charge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charge Food Cards</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="container">
+    <h1>Food Collection</h1>
 
+    <div class="filters">
+        <button id="veganFilter">Vegan</button>
+        <button id="lactoFreeFilter">Lacto Free</button>
+        <button id="glutenFreeFilter">Gluten Free</button>
+    </div>
+
+    <div class="card-container" id="cardContainer">
+        <!-- Cards will be dynamically generated here -->
+    </div>
+
+    <div class="navigation">
+        <button id="prevPage">Previous</button>
+        <button id="nextPage">Next</button>
+    </div>
+
+    <button id="cartButton">Shopping Cart</button>
+</div>
+
+<script src="scripts.js"></script>
 </body>
 </html>
