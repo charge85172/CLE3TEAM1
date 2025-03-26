@@ -27,7 +27,7 @@ header {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 5rem;
 }
 
 .container {
@@ -46,7 +46,7 @@ h1 {
 }
 
 .arrow {
-    font-size: 7em;
+    font-size: 12em;
 }
 
 /*necessary evil*/
@@ -60,7 +60,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
     grid-template-rows: repeat(3, auto); /* 3 rows */
-    gap: 2vw;
+    gap: 3vw;
     justify-items: center;
     width: 100%;
 }
@@ -71,13 +71,13 @@ h1 {
     background: white;
     border: 1px solid #ddd;
     border-radius: 2.5vw;
-    padding: 1.5vw;
+    padding: 1vw;
     text-align: center;
 }
 
 img {
     width: 20vw;
-    height: 25vw;
+    height: 30vw;
     object-fit: cover;
     border-radius: 2.5vw;
 }
@@ -91,7 +91,7 @@ img {
 }
 
 .buttonLayOut button {
-    margin: 1vh 2vw;
+    margin: 2vh 4vw;
     padding: 2vh 4vw;
     background-color: var(--button-color);
     color: var(--button-text);
