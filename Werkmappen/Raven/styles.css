@@ -31,53 +31,9 @@ h1 {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 100vw;
     margin: auto;
     text-align: center;
-}
-
-/*cards*/
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 15px;
-    width: 25vw;
-    text-align: center;
-}
-
-.card img {
-    max-width: 100%;
-    height: auto;
-}
-
-/*buttons*/
-.filters {
-    margin-bottom: 20px;
-}
-
-.filters button {
-    margin: 0 10px;
-    padding: 10px 15px;
-    background-color: var(--button-color);
-    color: var(--button-text);
-}
-
-.filters button:active {
-    background-color: var(--selected-color);
-    transition: 0.5s;
-}
-
-
-#cartButton {
-    padding: 10px 15px;
 }
 
 /*Move between pages*/
@@ -93,3 +49,66 @@ h1 {
     font-size: 7em;
 }
 
+/*necessary evil*/
+.card-filter-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+/*cards*/
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(3, auto); /* 3 rows */
+    gap: 2vw;
+    justify-items: center;
+    width: 100%;
+}
+
+.card {
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 2.5vw;
+    padding: 1.5vw;
+    text-align: center;
+}
+
+img {
+    width: 20vw;
+    height: 25vw;
+    object-fit: cover;
+    border-radius: 2.5vw;
+}
+
+
+/*buttons*/
+.filters {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2vw;
+}
+
+.filters button {
+    margin: 1vh 2vw;
+    padding: 2vh 4vw;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    font-size: 1.2rem;
+}
+
+.filters button:active {
+    background-color: var(--selected-color);
+    transition: 0.3s ease;
+}
+
+#cartButton {
+    grid-column: span 3; /* Makes the button span all three columns */
+    justify-self: center;
+    padding: 2vh 4vw;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    font-size: 1.2rem;
+    margin-top: 2vw;
+}
