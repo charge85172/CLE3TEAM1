@@ -1,17 +1,17 @@
 const cardsData = [
-    { title: "Vegan Salad", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Lacto Free Cheese", image: "https://via.placeholder.com/150", vegan: false, lactoFree: true, glutenFree: true },
-    { title: "Gluten Free Bread", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Fruit Smoothie", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Chicken Salad", image: "https://via.placeholder.com/150", vegan: false, lactoFree: true, glutenFree: true },
-    { title: "Vegan Burger", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: false },
-    { title: "Pasta", image: "https://via.placeholder.com/150", vegan: false, lactoFree: false, glutenFree: false },
-    { title: "Quinoa Bowl", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Chocolate Cake", image: "https://via.placeholder.com/150", vegan: false, lactoFree: false, glutenFree: false },
+    { title: "Vegan Salad", image: "../Renji/Fotos/vegan_salad.jpg", vegan: true, lactoFree: true, glutenFree: true },
+    { title: "Lacto Free Cheese", image: "../Renji/Fotos/vegan_salad.jpg", vegan: false, lactoFree: true, glutenFree: true },
+    { title: "Gluten Free Bread", image: "../Renji/Fotos/gluten_free_bread.jpg", vegan: true, lactoFree: true, glutenFree: true },
+    { title: "Fruit Smoothie", image: "../Renji/Fotos/smoothie.jpg", vegan: true, lactoFree: true, glutenFree: true },
+    { title: "Chicken Salad", image: "../Renji/Fotos/chicken_salad.jpg", vegan: false, lactoFree: true, glutenFree: true },
+    { title: "Vegan Burger", image: "../Renji/Fotos/vegan_burger.jpg", vegan: true, lactoFree: true, glutenFree: false },
+    { title: "Pasta", image: "../Renji/Fotos/pasta.jpg", vegan: false, lactoFree: false, glutenFree: false },
+    { title: "Quinoa Bowl", image: "../Renji/Fotos/quinoa_bowl.jpg", vegan: true, lactoFree: true, glutenFree: true },
+    { title: "Chocolate Cake", image: "../Renji/Fotos/chocolate_cake.jpg", vegan: false, lactoFree: false, glutenFree: false },
 ];
 
 let currentPage = 0;
-const itemsPerPage = 3;
+const itemsPerPage = 9;
 let filteredCards = cardsData;
 
 // Function to render cards
