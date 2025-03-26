@@ -1,42 +1,35 @@
-<!doctype html>
-<html lang="NL">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Werkmap Renji</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charge Food Cards</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<main>
-    <section>
-        <h1>Kip salade</h1>
-        <p>Salade met kip, avocado, komkomer, cherry tomaten en wortels</p>
-    </section>
-    <section>
-        <h1>Chocolade taart</h1>
-        <p>Taart gemaakt van gesmolten chocolade en cacaopoeder</p>
-    </section>
-    <section>
-        <h1>Gluten-vrije brood</h1>
-        <p>Brood gemaakt van amandelmeel</p>
-    </section>
-    <section>
-        <h1>Pasta bolougnese</h1>
-        <p>Pasta met gehakt, tomaten, uien, knoflook, parmigiano kaas en basilicum</p>
-    </section>
-    <section>Quinoa schaal</section>
-    <p>Schaal met quinoa, witte rijst, cherry tomaten, avocado, komkomer, sla en kikkererwten</p>
-    <section>Smoothie</section>
-    <p>Smoothie gemaakt van aardbei, braambes, mango en melk</p>
-    <section>
-        <h1>Vegan burger</h1>
-        <p>Vegan burger met sla, tomaat, ui, kikkererwten, cheddar kaas en mayonaise</p>
-    </section>
-    <section>
-        <h1>Vegan salade</h1>
-        <p>Vegan salade gemaakt van avocado, komkomer, sla,kikkererwten, cherry tomaten en wortels</p>
-    </section>
-</main>
+<div class="container">
+    <h1>Food Collection</h1>
+
+    <div class="filters">
+        <button id="veganFilter">Vegan</button>
+        <button id="lactoFreeFilter">Geen melk</button>
+        <button id="glutenFreeFilter">Geen gluten</button>
+        <button id="nutFreeFilter">Geen noten</button>
+    </div>
+
+    <div class="card-container" id="cardContainer">
+        <!-- Cards will be dynamically generated here -->
+    </div>
+
+    <div class="navigation">
+        <button id="prevPage">Previous</button>
+        <button id="nextPage">Next</button>
+    </div>
+    <div id="cart-container">
+        <button id="cartButton">Shopping Cart</button>
+    </div>
+</div>
+
+<script src="scripts.js"></script>
 </body>
 </html>
