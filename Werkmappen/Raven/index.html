@@ -13,7 +13,7 @@
 
 <header>
     <button id="prevPage" class="arrow"><i class="fa-solid fa-left-long"></i></button>
-    <h1>Food</h1>
+    <h1>Eten</h1>
     <button id="nextPage" class="arrow"><i class="fa-solid fa-right-long"></i></button>
 </header>
 
@@ -27,18 +27,35 @@
                 <!-- Cards will be dynamically generated here -->
             </div>
 
-            <div class="filters">
-                <button id="veganFilter">
-                    <i class="fa-solid fa-seedling" style="color: #63E6BE;"></i>
-                    Vegan
-                </button>
-                <button id="lactoFreeFilter">
-                    <i class="fa-solid fa-cheese" style="color: #FFD43B;"></i>
-                    Lacto Free
-                </button>
-                <button id="glutenFreeFilter">
-                    <i class="fa-solid fa-wheat-awn" style="color: #FFD43B;"></i>
-                    Gluten Free
+            <div class="buttonLayOut">
+
+                <div class="filters">
+
+                    <button id="veganFilter">
+                        <i class="fa-solid fa-seedling buttonIcon" style="color: #63E6BE;"></i>
+                        vegatarisch
+                    </button>
+
+                    <button id="lactoFreeFilter">
+                        <i class="fa-solid fa-cheese buttonIcon" style="color: #FFD43B;"></i>
+                        Lactosevrij
+                    </button>
+
+                    <button id="glutenFreeFilter">
+                        <i class="fa-solid fa-wheat-awn buttonIcon" style="color: #FFD43B;"></i>
+                        Glutenvrij
+                    </button>
+
+                    <button id="nutFreeFilter">
+                        <i class="fa-solid fa-jar buttonIcon" style="color: #bb854b;"></i>
+                        Notenvrij
+                    </button>
+
+                </div>
+
+                <button id="cartButton">
+                    <i class="fa-solid fa-cart-shopping buttonIcon" style="color: #ffffff;"></i>
+                    Winkelwagen
                 </button>
 
             </div>
@@ -46,10 +63,6 @@
 
         </div>
 
-        <button id="cartButton">
-            <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-            Shopping Cart
-        </button>
 
     </div>
 

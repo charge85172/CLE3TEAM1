@@ -84,13 +84,13 @@ img {
 
 
 /*buttons*/
-.filters {
+.buttonLayOut {
     display: flex;
     flex-direction: column;
     margin-bottom: 2vw;
 }
 
-.filters button {
+.buttonLayOut button {
     margin: 1vh 2vw;
     padding: 2vh 4vw;
     background-color: var(--button-color);
@@ -100,7 +100,13 @@ img {
 
 .filters button:active {
     background-color: var(--selected-color);
+    color: var(--text-color);
     transition: 0.3s ease;
+}
+
+.buttonIcon {
+    font-size: 2em;
+    padding: 2vw;
 }
 
 #cartButton {
