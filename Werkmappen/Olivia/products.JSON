@@ -1,5 +1,5 @@
-[
-  [
+{
+  "dishes": [
     {
       "title": "steak",
       "image": "",
@@ -280,7 +280,7 @@
       "nutFree": false
     }
   ],
-  [
+  "drinks": [
     {
       "title": "koffie",
       "image": "",
@@ -435,7 +435,7 @@
       "nutFree": true
     }
   ],
-  [
+  "deserts": [
     {
       "title": "chocolade taart",
       "image": "",
@@ -572,4 +572,4 @@
       "nutFree": true
     }
   ]
-]
+}
