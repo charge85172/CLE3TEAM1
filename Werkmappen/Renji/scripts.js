@@ -186,7 +186,8 @@ function cartShow() {
         cartActive = false
     } else {
         filteredCards = cardsData
-        shoppingCart.innerHTML = "Shopping Cart"
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Winkelwagen"
         cartActive = true
     }
 
