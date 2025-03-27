@@ -1,78 +1,7 @@
-// let cardsData = [
-//     {
-//         title: "Vegan Salad",
-//         image: "https://via.placeholder.com/150",
-//         vegan: true,
-//         lactoFree: true,
-//         glutenFree: true,
-//         nutFree: true
-//     },
-//     {
-//         title: "Lacto Free Cheese",
-//         image: "https://via.placeholder.com/150",
-//         vegan: false,
-//         lactoFree: true,
-//         glutenFree: true,
-//         nutFree: true
-//     },
-//     {
-//         title: "Gluten Free Bread",
-//         image: "https://via.placeholder.com/150",
-//         vegan: true,
-//         lactoFree: true,
-//         glutenFree: true,
-//         nutFree: true
-//     },
-//     {
-//         title: "Fruit Smoothie",
-//         image: "https://via.placeholder.com/150",
-//         vegan: true,
-//         lactoFree: true,
-//         glutenFree: true,
-//         nutFree: true
-//     },
-//     {
-//         title: "Chicken Salad",
-//         image: "https://via.placeholder.com/150",
-//         vegan: false,
-//         lactoFree: true,
-//         glutenFree: true,
-//         nutFree: false
-//     },
-//     {
-//         title: "Vegan Burger",
-//         image: "https://via.placeholder.com/150",
-//         vegan: true,
-//         lactoFree: true,
-//         glutenFree: false,
-//         nutFree: true
-//     },
-//     {
-//         title: "Pasta",
-//         image: "https://via.placeholder.com/150",
-//         vegan: false,
-//         lactoFree: false,
-//         glutenFree: false,
-//         nutFree: false
-//     },
-//     {
-//         title: "Quinoa Bowl",
-//         image: "https://via.placeholder.com/150",
-//         vegan: true,
-//         lactoFree: true,
-//         glutenFree: true,
-//         nutFree: true
-//     },
-//     {
-//         title: "Chocolate Cake",
-//         image: "https://via.placeholder.com/150",
-//         vegan: false,
-//         lactoFree: false,
-//         glutenFree: false,
-//         nutFree: false
-//     },
-// ];
+// if cartactive -> clicking filter returns the menu, while cartactive => remove filterbuttons/return to menu/filter in cart
+
 let cardsData
+let filteredCards
 let dishes
 let drinks
 let deserts
@@ -88,8 +17,10 @@ fetch("products.JSON")
 
 let currentPage = 0;
 const itemsPerPage = 3;
-let filteredCards = cardsData;
+
+
 let cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
+let cartActive = false
 
 function pageHandler(data) {
     dishes = data.dishes
@@ -120,16 +51,42 @@ function renderCards() {
             <img src="${card.image}" alt="${card.title}">
             <h3>${card.title}</h3>
         `;
-        cardElement.addEventListener('click', () => addToCart(card)); // Add click event to add to cart
+        cardElement.addEventListener('click', () => !cartActive ? addToCart(card) : removeFromCart(card));
         cardContainer.appendChild(cardElement);
     });
 }
 
-// Function to add item to cart
+// Functions to add and remove item to cart
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
     alert(`${item.title} has been added to your cart!`);
+}
+
+function removeFromCart(item) {
+    cart.splice(cart.indexOf(item), 1)
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${item.title} has been removed from your cart!`);
+    //update de winkelwagen
+    renderCards()
+}
+
+//cart showing functions
+const shoppingCart = document.getElementById('cartButton');
+shoppingCart.addEventListener('click', cartShow);
+
+function cartShow() {
+    if (!cartActive) {
+        cartActive = true
+        filteredCards = cart
+        shoppingCart.innerHTML = "Menu"
+    } else {
+        cartActive = false
+        filteredCards = cardsData
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Winkelwagen"
+    }
+    renderCards();
 }
 
 // Function to handle filters
