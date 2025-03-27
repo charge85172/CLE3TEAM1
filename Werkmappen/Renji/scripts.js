@@ -1,7 +1,7 @@
 const cardsData = [
     {
         title: "Vegan Salad",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/vegan_salad.jpg",
         vegan: true,
         lactoFree: true,
         glutenFree: true,
@@ -9,7 +9,7 @@ const cardsData = [
     },
     {
         title: "Lacto Free Cheese",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/lacto_free_cheese.jpg",
         vegan: false,
         lactoFree: true,
         glutenFree: true,
@@ -17,7 +17,7 @@ const cardsData = [
     },
     {
         title: "Gluten Free Bread",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/gluten_free_bread.png",
         vegan: true,
         lactoFree: true,
         glutenFree: true,
@@ -25,7 +25,7 @@ const cardsData = [
     },
     {
         title: "Fruit Smoothie",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/smoothie.jpg",
         vegan: true,
         lactoFree: true,
         glutenFree: true,
@@ -33,7 +33,7 @@ const cardsData = [
     },
     {
         title: "Chicken Salad",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/chicken_salad.jpg",
         vegan: false,
         lactoFree: true,
         glutenFree: true,
@@ -41,7 +41,7 @@ const cardsData = [
     },
     {
         title: "Vegan Burger",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/vegan_burger.jpg",
         vegan: true,
         lactoFree: true,
         glutenFree: false,
@@ -49,7 +49,7 @@ const cardsData = [
     },
     {
         title: "Pasta",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/pasta.jpg",
         vegan: false,
         lactoFree: false,
         glutenFree: false,
@@ -57,7 +57,7 @@ const cardsData = [
     },
     {
         title: "Quinoa Bowl",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/quinoa_bowl.jpg",
         vegan: true,
         lactoFree: true,
         glutenFree: true,
@@ -65,14 +65,14 @@ const cardsData = [
     },
     {
         title: "Chocolate Cake",
-        image: "https://via.placeholder.com/150",
+        image: "Fotos/chocolate_cake.jpg",
         vegan: false,
         lactoFree: false,
         glutenFree: false,
         nutFree: false
     },
 ];
-let cartActive = false
+let cartActive = true;
 let currentPage = 0;
 const itemsPerPage = 3;
 let filteredCards = cardsData;
@@ -95,9 +95,9 @@ function renderCards() {
             <h3>${card.title}</h3>
         `;
         if (cartActive) {
-            cardElement.addEventListener('click', () => deleteFromCart(card)); // Add click event to add to cart
+            cardElement.addEventListener('click', () => addToCart(card)); // Add click event to add to cart
         } else {
-            cardElement.addEventListener('click', () => addToCart(card));
+            cardElement.addEventListener('click', () => deleteFromCart(card));
         }
         cardContainer.appendChild(cardElement);
     });
@@ -111,9 +111,10 @@ function addToCart(item) {
 }
 
 function deleteFromCart(item) {
-    cart.splice(item)
+    cart.splice(item, 1)
     localStorage.setItem('cart', JSON.stringify(cart));
     alert(`${item.title} has been deleted from your cart!`);
+    renderCards();
 }
 
 // Function to handle filters
@@ -171,7 +172,6 @@ document.getElementById('prevPage').addEventListener('click', function () {
 });
 
 // Initial render
-renderCards();
 let shoppingCart = document.getElementById('cartButton');
 shoppingCart.addEventListener('click', cartShow);
 cart.forEach((value, index) => {
@@ -179,16 +179,19 @@ cart.forEach((value, index) => {
 });
 
 function cartShow() {
+
     if (cartActive) {
         filteredCards = cart
         shoppingCart.innerHTML = "Menu"
         cartActive = false
     } else {
         filteredCards = cardsData
-        shoppingCart.innerHTML = "Shopping cart"
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Winkelwagen"
         cartActive = true
-
     }
-    renderCards()
+
+    renderCards();
 }
 
+renderCards();
