@@ -265,7 +265,7 @@
       "title": "kipsalade",
       "image": "images/chicken_salad.jpg",
       "description": "Salade met kip, avocado, komkomer, tomaatjes en wortel",
-      "vegan": true,
+      "vegan": false,
       "lactoFree": true,
       "glutenFree": true,
       "nutFree": true

@@ -89,6 +89,7 @@ function cartShow() {
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Winkelwagen"
     }
+    currentPage = 0
     renderCards();
 }
 
