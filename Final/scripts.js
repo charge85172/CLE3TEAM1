@@ -5,6 +5,12 @@ let filteredCards
 let dishes
 let drinks
 let deserts
+let currentPage = 0;
+const itemsPerPage = 9;
+
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cartActive = false
 fetch("products.JSON")
     .then((response) => {
         if (!response.ok) {
@@ -15,12 +21,6 @@ fetch("products.JSON")
     .then(pageHandler)
     .catch(error => console.log(error))
 
-let currentPage = 0;
-const itemsPerPage = 9;
-
-// Load cart from localStorage
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let cartActive = false
 
 function pageHandler(data) {
     dishes = data.dishes
