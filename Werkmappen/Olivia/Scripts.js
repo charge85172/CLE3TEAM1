@@ -1,5 +1,5 @@
 // if cartactive -> clicking filter returns the menu, while cartactive => remove filterbuttons/return to menu/filter in cart
-
+let pageCardData
 let cardsData
 let filteredCards
 let dishes
@@ -16,10 +16,10 @@ fetch("products.JSON")
     .catch(error => console.log(error))
 
 let currentPage = 0;
-const itemsPerPage = 3;
+const itemsPerPage = 9;
 
-
-let cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let cartActive = false
 
 function pageHandler(data) {
@@ -28,8 +28,9 @@ function pageHandler(data) {
     deserts = data.deserts
 
     //if page= something =>
-    filteredCards = dishes
-    cardsData = dishes
+    pageCardData = dishes
+    cardsData = pageCardData
+    filteredCards = cardsData
 
     // Initial render
     renderCards();
@@ -78,10 +79,12 @@ shoppingCart.addEventListener('click', cartShow);
 function cartShow() {
     if (!cartActive) {
         cartActive = true
+        cardsData = cart
         filteredCards = cart
         shoppingCart.innerHTML = "Menu"
     } else {
         cartActive = false
+        cardsData = pageCardData
         filteredCards = cardsData
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Winkelwagen"
