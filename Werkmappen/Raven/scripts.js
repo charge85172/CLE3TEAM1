@@ -12,7 +12,7 @@ const cardsData = [
 
 let cartActive = true;
 let currentPage = 0;
-const itemsPerPage = 3;
+const itemsPerPage = 9;
 let filteredCards = cardsData;
 let cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
 
