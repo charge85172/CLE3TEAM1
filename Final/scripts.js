@@ -41,9 +41,9 @@ function renderCards() {
     const cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
 
-    const start = currentPage * itemsPerPage;
-    const end = start + itemsPerPage;
-    const cardsToDisplay = filteredCards.slice(start, end);
+    const firstItem = currentPage * itemsPerPage;
+    const lastItem = firstItem + itemsPerPage;
+    const cardsToDisplay = filteredCards.slice(firstItem, lastItem);
 
     cardsToDisplay.forEach(card => {
         const cardElement = document.createElement('div');
