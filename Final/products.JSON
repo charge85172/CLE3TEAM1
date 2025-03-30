@@ -272,7 +272,7 @@
     },
     {
       "title": "vega pasta pesto",
-      "image": "",
+      "image": "images/vega_pasta_pesto.jpg",
       "description": "Spagetti met vegaballetjes in pesto: een saus van basilicum, olie en noten",
       "vegan": true,
       "lactoFree": true,
@@ -283,7 +283,7 @@
   "drinks": [
     {
       "title": "koffie",
-      "image": "",
+      "image": "images/koffie.jpg",
       "description": "met los geserveerd: melk en suiker",
       "vegan": true,
       "lactoFree": true,
@@ -292,7 +292,7 @@
     },
     {
       "title": "latte machiatto",
-      "image": "",
+      "image": "images/latte_machiatto.jpg",
       "description": "opgeschuimde havermelk met sterke koffie met los geserveerd: melk en suiker",
       "vegan": true,
       "lactoFree": true,
@@ -301,7 +301,7 @@
     },
     {
       "title": "thee",
-      "image": "",
+      "image": "images/thee.jpg",
       "description": "heet water met thee en suiker los geserveerd",
       "vegan": true,
       "lactoFree": true,
@@ -310,7 +310,7 @@
     },
     {
       "title": "ijsthee",
-      "image": "",
+      "image": "images/ijsthee.jpg",
       "description": "flesje (lipton) icetea green",
       "vegan": true,
       "lactoFree": true,
@@ -319,7 +319,7 @@
     },
     {
       "title": "cola",
-      "image": "",
+      "image": "images/cola.jpg",
       "description": "flesje (coca) cola",
       "vegan": true,
       "lactoFree": true,
@@ -328,7 +328,7 @@
     },
     {
       "title": "appelsap",
-      "image": "",
+      "image": "images/appelsap.jpg",
       "description": "flesje (appelsientje) appelsap",
       "vegan": true,
       "lactoFree": true,
@@ -337,7 +337,7 @@
     },
     {
       "title": "sinaasappelsap",
-      "image": "",
+      "image": "images/sinaasappelsap.jpg",
       "description": "zonder pulp",
       "vegan": true,
       "lactoFree": true,
@@ -346,7 +346,7 @@
     },
     {
       "title": "chocolade melk",
-      "image": "",
+      "image": "images/chocolade_melk.jpg",
       "description": "koude chocolade melk",
       "vegan": false,
       "lactoFree": false,
@@ -355,7 +355,7 @@
     },
     {
       "title": "Hete choco",
-      "image": "",
+      "image": "images/hete_choco.jpg",
       "description": "Gemaakt met chocolade, melk en anijszaad",
       "vegan": false,
       "lactoFree": false,
@@ -364,7 +364,7 @@
     },
     {
       "title": "Mojito",
-      "image": "",
+      "image": "images/mojito.jpg",
       "description": "bruiswater met limoen, muntblaadjes, rietsuiker en RUM!",
       "vegan": true,
       "lactoFree": true,
@@ -373,7 +373,7 @@
     },
     {
       "title": "Gin tonic",
-      "image": "",
+      "image": "images/gin_tonic.jpg",
       "description": "tonic met GIN! met een partje limoen",
       "vegan": true,
       "lactoFree": true,
@@ -382,7 +382,7 @@
     },
     {
       "title": "Bier",
-      "image": "",
+      "image": "images/bier.jpg",
       "description": "500ml vloeibaar lokaal gebrouwen graan van de tap",
       "vegan": true,
       "lactoFree": true,
@@ -391,7 +391,7 @@
     },
     {
       "title": "Wijn",
-      "image": "",
+      "image": "images/wijn.jpg",
       "description": "vloeibaar gefermenteerd fruit uit een kelder in Limburg",
       "vegan": true,
       "lactoFree": true,
@@ -400,7 +400,7 @@
     },
     {
       "title": "bitterlemon",
-      "image": "",
+      "image": "images/bitterlemon.jpg",
       "description": "bruiswater met kinine, suiker, limoen en een beetje fruitsap",
       "vegan": true,
       "lactoFree": true,
@@ -409,7 +409,7 @@
     },
     {
       "title": "Energy drink",
-      "image": "",
+      "image": "images/energy_drink.jpg",
       "description": "Vloeibare ADHD met suiker, cafeine, taurine en diabetose",
       "vegan": false,
       "lactoFree": false,
@@ -418,7 +418,7 @@
     },
     {
       "title": "bruiswater",
-      "image": "",
+      "image": "images/bruiswater.jpg",
       "description": "uit een fles",
       "vegan": true,
       "lactoFree": true,
@@ -447,7 +447,7 @@
     },
     {
       "title": "bananen split",
-      "image": "",
+      "image": "images/bananen_split.jpg",
       "description": "banaan met chocolade en vanille ijs",
       "vegan": false,
       "lactoFree": false,
@@ -456,7 +456,7 @@
     },
     {
       "title": "cheesecake",
-      "image": "",
+      "image": "images/cheesecake.jpg",
       "description": "gemaakt met bastogne koeken als bodem",
       "vegan": false,
       "lactoFree": false,
@@ -465,7 +465,7 @@
     },
     {
       "title": "tiramisu",
-      "image": "",
+      "image": "images/tiramisu.jpg",
       "description": "gemaakt met lange vingers, koffie, amaretto, mascapone en slagroom",
       "vegan": false,
       "lactoFree": false,
@@ -474,7 +474,7 @@
     },
     {
       "title": "sorbet",
-      "image": "",
+      "image": "images/sorbet.jpg",
       "description": "bolletjes aardbei, kersen, chocolade en vanille ijs met een koekje",
       "vegan": false,
       "lactoFree": false,
@@ -483,7 +483,7 @@
     },
     {
       "title": "slagroom soesjes",
-      "image": "",
+      "image": "images/slagroom_soesjes.jpg",
       "description": "slagroom soesjes met chocolade met een bolletje chocolade en vanille ijs",
       "vegan": false,
       "lactoFree": false,
@@ -492,7 +492,7 @@
     },
     {
       "title": "baklava",
-      "image": "",
+      "image": "images/baklava.jpg",
       "description": "gemaakt van gelaagd deeg met honing, walnoten, pistache noten en kaneel",
       "vegan": false,
       "lactoFree": false,
@@ -501,7 +501,7 @@
     },
     {
       "title": "creme brulee",
-      "image": "",
+      "image": "images/creme_brulee.jpg",
       "description": "custard met een knapperig caramel laagje",
       "vegan": false,
       "lactoFree": false,
@@ -510,7 +510,7 @@
     },
     {
       "title": "brownies",
-      "image": "",
+      "image": "images/brownies.jpg",
       "description": "3 chocolade taartjes met een knapperige bovenlaag en een plakkerige luchtige binnekant",
       "vegan": false,
       "lactoFree": false,
@@ -519,7 +519,7 @@
     },
     {
       "title": "appeltaart",
-      "image": "",
+      "image": "images/appeltaart.jpg",
       "description": "taart met appelvulling en een kruimelig deeg",
       "vegan": true,
       "lactoFree": true,
@@ -528,7 +528,7 @@
     },
     {
       "title": "safe sundee",
-      "image": "",
+      "image": "images/safe_sundee.jpg",
       "description": "vega slagroom ijs in een vega koekje",
       "vegan": true,
       "lactoFree": true,
@@ -537,7 +537,7 @@
     },
     {
       "title": "fruit mix",
-      "image": "",
+      "image": "images/fruit_mix.jpg",
       "description": "stukjes banaan, sinaasappel en appel",
       "vegan": true,
       "lactoFree": true,
@@ -546,7 +546,7 @@
     },
     {
       "title": "Meloen",
-      "image": "",
+      "image": "images/meloen.jpg",
       "description": "3 stukken water meloen",
       "vegan": true,
       "lactoFree": true,
@@ -555,7 +555,7 @@
     },
     {
       "title": "gekarameliseerde vruchten",
-      "image": "",
+      "image": "images/gekarmeliseerde_vruchten.jpg",
       "description": "stukken gebakken banaan, appel en sinaasappel met een laagje karamel",
       "vegan": true,
       "lactoFree": true,
