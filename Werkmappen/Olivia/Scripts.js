@@ -107,7 +107,7 @@ function cartShow() {
             "                        Notenvrij\n" +
             "                    </button>"
         activateFilters()
-    } else {
+    } else {// do toggle code die dan aan en dan terug gaat
         cartActive = true
         cardsData = cart
         filteredCards = cart
@@ -140,26 +140,15 @@ function applyFilters() {
 
 // Event listeners for filter buttons
 function activateFilters() {
-    document.getElementById('veganFilter').addEventListener('click', function () {
-        this.classList.toggle('active');
-        applyFilters();
-    });
-
-    document.getElementById('lactoFreeFilter').addEventListener('click', function () {
-        this.classList.toggle('active');
-        applyFilters();
-    });
-
-    document.getElementById('glutenFreeFilter').addEventListener('click', function () {
-        this.classList.toggle('active');
-        applyFilters();
-    });
-
-    document.getElementById('nutFreeFilter').addEventListener('click', function () { // New event listener
-        this.classList.toggle('active');
-        applyFilters();
-    });
+    let filters = ['veganFilter', 'lactoFreeFilter', 'glutenFreeFilter', 'nutFreeFilter']
+    for (const filter of filters) {
+        document.getElementById(filter).addEventListener('click', function () {
+            this.classList.toggle('active');
+            applyFilters();
+        });
+    }
 }
+
 
 // Pagination functions
 document.getElementById('nextPage').addEventListener('click', function () {
