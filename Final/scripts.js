@@ -111,7 +111,8 @@ function cartShow() {
         cartActive = true
         cardsData = cart
         filteredCards = cart
-        shoppingCart.innerHTML = "Menu"
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Menu"
         // filters weg
         console.log(filters)
         filters.innerHTML = ""
