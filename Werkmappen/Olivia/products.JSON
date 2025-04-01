@@ -2,7 +2,7 @@
   "dishes": [
     {
       "title": "steak",
-      "image": "",
+      "image": "images/steak.jpg",
       "description": "Vlees van een koe gebakken in olijfolie",
       "vegan": false,
       "lactoFree": true,
@@ -11,7 +11,7 @@
     },
     {
       "title": "zalmfillet",
-      "image": "",
+      "image": "images/salmon.jpg",
       "description": "Gebakken zalm in olijfolie met zout en peper",
       "vegan": false,
       "lactoFree": true,
@@ -20,7 +20,7 @@
     },
     {
       "title": "friet",
-      "image": "",
+      "image": "images/french_fries.jpg",
       "description": "Aardappelfriet gefrituurd in zonnebloemolie",
       "vegan": true,
       "lactoFree": true,
@@ -29,7 +29,7 @@
     },
     {
       "title": "zoete aardappel friet",
-      "image": "",
+      "image": "images/zoete_aardappel_friet.jpg",
       "description": "friet van zoete aardappelen gefrituurd in zonnebloemolie",
       "vegan": true,
       "lactoFree": true,
@@ -38,8 +38,8 @@
     },
     {
       "title": "mixed Grill",
-      "image": "",
-      "description": "Verschillende skukken gebakken vlees: kip, koe, varken",
+      "image": "images/mixed_grill.jpg",
+      "description": "Verschillende soorten gebakken vlees: kip, koe, varken",
       "vegan": false,
       "lactoFree": true,
       "glutenFree": true,
@@ -56,7 +56,7 @@
     },
     {
       "title": "hamburger",
-      "image": "",
+      "image": "images/hamburger.jpg",
       "description": "hamburgerbroodje met een burger van koevlees, gebakken ui en kaas",
       "vegan": false,
       "lactoFree": false,
@@ -74,7 +74,7 @@
     },
     {
       "title": "clubsandwich",
-      "image": "",
+      "image": "images/clubsandwitch.jpg",
       "description": "geroosterd wit brood met sla, gebakken bacon, kip, uiringen, avocado en kaas",
       "vegan": false,
       "lactoFree": false,
@@ -83,7 +83,7 @@
     },
     {
       "title": "carpaccio",
-      "image": "",
+      "image": "images/carpaccio.jpg",
       "description": "dungesnede rouwe koevlees met mayonaise, pijnboompitten en parmazaanse kaas",
       "vegan": false,
       "lactoFree": false,
@@ -92,7 +92,7 @@
     },
     {
       "title": "kip tortilla wraps",
-      "image": "",
+      "image": "images/kip_tortilla_wraps.jpg",
       "description": "een gerolde tortilla met kip, tomaat, avocado en kruidensaus",
       "vegan": false,
       "lactoFree": true,
@@ -101,7 +101,7 @@
     },
     {
       "title": "gevulde paprika",
-      "image": "",
+      "image": "images/gevulde_paprika.jpg",
       "description": "Een uitgeholde paprika met rundergehakt, kaas en kruiden gebakken in de oven",
       "vegan": false,
       "lactoFree": false,
@@ -110,7 +110,7 @@
     },
     {
       "title": "vega balletjes",
-      "image": "",
+      "image": "images/vega_balletjes.jpg",
       "description": "gebakken balletjes van soja, pitten, kikkererwten en kruiden",
       "vegan": true,
       "lactoFree": true,
@@ -119,7 +119,7 @@
     },
     {
       "title": "courgette soep",
-      "image": "",
+      "image": "images/courgette_soep.jpg",
       "description": "soep van geblendered courgette, ui, knoflook in water met een beetje olijfolie",
       "vegan": true,
       "lactoFree": true,
@@ -128,7 +128,7 @@
     },
     {
       "title": "paddestoelenstoof",
-      "image": "",
+      "image": "images/paddestoelenstoof.jpg",
       "description": "stoofpot van oesterzwam, champignons, ui, knoflook, paprika en kruiden",
       "vegan": true,
       "lactoFree": true,
@@ -137,7 +137,7 @@
     },
     {
       "title": "witlofgratin",
-      "image": "",
+      "image": "images/witlofgratin.jpg",
       "description": "gemaakt van witlof, ui, walnoten, wortel, knoflook, roomboter, bloem melk en kaas",
       "vegan": false,
       "lactoFree": false,
@@ -146,7 +146,7 @@
     },
     {
       "title": "pizza margherita",
-      "image": "",
+      "image": "images/pizza_margherite.jpg",
       "description": "pizza met tomatensaus, kaas, basilicum en mozzarella",
       "vegan": true,
       "lactoFree": false,
@@ -155,7 +155,7 @@
     },
     {
       "title": "vega gevulde paprika",
-      "image": "",
+      "image": "images/vega_gevulde_paprika.jpg",
       "description": "Een uitgeholde paprika met soja, uien, knoflook, kaas en kruiden gebakken in de oven",
       "vegan": true,
       "lactoFree": true,
@@ -163,8 +163,8 @@
       "nutFree": true
     },
     {
-      "title": "stampot",
-      "image": "",
+      "title": "stamppot",
+      "image": "images/stamppot.jpg",
       "description": "gestampte aardappel met wortel, andijvie, boter en kruiden, geserveerd met runderjus",
       "vegan": true,
       "lactoFree": false,
@@ -173,7 +173,7 @@
     },
     {
       "title": "Gamba's",
-      "image": "",
+      "image": "images/gambas.jpg",
       "description": "Gebakken ongepelde gamba's met kruidenboter",
       "vegan": false,
       "lactoFree": false,
@@ -182,7 +182,7 @@
     },
     {
       "title": "kapsalon",
-      "image": "",
+      "image": "images/kapsalon.jpg",
       "description": "friet met een laag kaas, shoarma, knoflooksaus en sla",
       "vegan": false,
       "lactoFree": false,
@@ -191,7 +191,7 @@
     },
     {
       "title": "vega kapsalon",
-      "image": "",
+      "image": "images/vega_kapsalon.jpg",
       "description": "friet met een laag kaas, soja, ui, knoflook, tomaat, komkommer, sla en kruiden",
       "vegan": true,
       "lactoFree": true,
@@ -200,8 +200,8 @@
     },
     {
       "title": "garnalen cocktail",
-      "image": "",
-      "description": "garmalen in cocktailsaus met sla",
+      "image": "images/garnalen_coctail.jpg",
+      "description": "garnalen in cocktailsaus met sla",
       "vegan": false,
       "lactoFree": false,
       "glutenFree": true,
@@ -209,7 +209,7 @@
     },
     {
       "title": "tomatensoep",
-      "image": "",
+      "image": "images/tomatensoep.jpg",
       "description": "soep van tomatenpuree met ui, knoflook, room, water, basilicum",
       "vegan": false,
       "lactoFree": false,
@@ -218,7 +218,7 @@
     },
     {
       "title": "kippensoep",
-      "image": "",
+      "image": "images/kippensoep.jpg",
       "description": "soep van kip met ui, wortel, prei en kruiden",
       "vegan": false,
       "lactoFree": true,
@@ -227,7 +227,7 @@
     },
     {
       "title": "vega kippensoep",
-      "image": "",
+      "image": "images/vega_kippensoep.jpg",
       "description": "soep met kippensmaak, ui, wortel, prei en kruiden",
       "vegan": true,
       "lactoFree": true,
@@ -237,7 +237,7 @@
     {
       "title": "pasta bolognese",
       "image": "images/pasta.jpg",
-      "description": "spagetti met rundergehakt, tomatenpuree, oregano, basilicum en parmazaanse kaas",
+      "description": "spaghetti met rundergehakt, tomatenpuree, oregano, basilicum en parmazaanse kaas",
       "vegan": false,
       "lactoFree": false,
       "glutenFree": false,
