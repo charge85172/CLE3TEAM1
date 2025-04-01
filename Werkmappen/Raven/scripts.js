@@ -1,29 +1,49 @@
-const cardsData = [
-    { title: "Vegan Salad", image: "../Renji/Fotos/vegan_salad.jpg", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Lacto Free Cheese", image: "../Renji/Fotos/lacto_free_cheese.jpg", vegan: false, lactoFree: true, glutenFree: true },
-    { title: "Gluten Free Bread", image: "../Renji/Fotos/gluten_free_bread.png", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Fruit Smoothie", image: "../Renji/Fotos/smoothie.jpg", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Chicken Salad", image: "../Renji/Fotos/chicken_salad.jpg", vegan: false, lactoFree: true, glutenFree: true },
-    { title: "Vegan Burger", image: "../Renji/Fotos/vegan_burger.jpg", vegan: true, lactoFree: true, glutenFree: false },
-    { title: "Pasta", image: "../Renji/Fotos/pasta.jpg", vegan: false, lactoFree: false, glutenFree: false },
-    { title: "Quinoa Bowl", image: "../Renji/Fotos/quinoa_bowl.jpg", vegan: true, lactoFree: true, glutenFree: true },
-    { title: "Chocolate Cake", image: "../Renji/Fotos/chocolate_cake.jpg", vegan: false, lactoFree: false, glutenFree: false },
-];
-
-let cartActive = true;
+// if cartactive -> clicking filter returns the menu, while cartactive => remove filterbuttons/return to menu/filter in cart
+let pageCardData
+let cardsData
+let filteredCards
+let dishes
+let drinks
+let deserts
 let currentPage = 0;
 const itemsPerPage = 9;
-let filteredCards = cardsData;
-let cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
+
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cartActive = false
+fetch("products.JSON")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        }
+        return response.json()
+    })
+    .then(pageHandler)
+    .catch(error => console.log(error))
+
+
+function pageHandler(data) {
+    dishes = data.dishes
+    drinks = data.drinks
+    deserts = data.deserts
+
+    //if page= something =>
+    pageCardData = dishes
+    cardsData = pageCardData
+    filteredCards = cardsData
+
+    // Initial render
+    renderCards();
+}
 
 // Function to render cards
 function renderCards() {
     const cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
 
-    const start = currentPage * itemsPerPage;
-    const end = start + itemsPerPage;
-    const cardsToDisplay = filteredCards.slice(start, end);
+    const firstItem = currentPage * itemsPerPage;
+    const lastItem = firstItem + itemsPerPage;
+    const cardsToDisplay = filteredCards.slice(firstItem, lastItem);
 
     cardsToDisplay.forEach(card => {
         const cardElement = document.createElement('div');
@@ -32,26 +52,44 @@ function renderCards() {
             <img src="${card.image}" alt="${card.title}">
             <h3>${card.title}</h3>
         `;
-        if (cartActive) {
-            cardElement.addEventListener('click', () => addToCart(card)); // Add click event to add to cart
-        } else {
-            cardElement.addEventListener('click', () => deleteFromCart(card));
-        }
+        cardElement.addEventListener('click', () => !cartActive ? addToCart(card) : removeFromCart(card));
         cardContainer.appendChild(cardElement);
     });
 }
 
-// Function to add item to cart
+// Functions to add and remove item to cart
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
     alert(`${item.title} has been added to your cart!`);
 }
 
-function deleteFromCart(item) {
-    cart.splice(item, 1)
+function removeFromCart(item) {
+    cart.splice(cart.indexOf(item), 1)
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${item.title} has been deleted from your cart!`);
+    alert(`${item.title} has been removed from your cart!`);
+    //update de winkelwagen
+    renderCards()
+}
+
+//cart showing functions
+const shoppingCart = document.getElementById('cartButton');
+shoppingCart.addEventListener('click', cartShow);
+
+function cartShow() {
+    if (!cartActive) {
+        cartActive = true
+        cardsData = cart
+        filteredCards = cart
+        shoppingCart.innerHTML = "Menu"
+    } else {
+        cartActive = false
+        cardsData = pageCardData
+        filteredCards = cardsData
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Winkelwagen"
+    }
+    currentPage = 0
     renderCards();
 }
 
@@ -108,27 +146,3 @@ document.getElementById('prevPage').addEventListener('click', function () {
         renderCards();
     }
 });
-
-// Initial render
-let shoppingCart = document.getElementById('cartButton');
-shoppingCart.addEventListener('click', cartShow);
-cart.forEach((value, index) => {
-    console.log(`Index: ${cart}`);
-});
-
-function cartShow() {
-
-    if (cartActive) {
-        filteredCards = cart
-        shoppingCart.innerHTML = "Menu"
-        cartActive = false
-    } else {
-        filteredCards = cardsData
-        shoppingCart.innerHTML = "Shopping Cart"
-        cartActive = true
-    }
-
-    renderCards();
-}
-
-renderCards();
