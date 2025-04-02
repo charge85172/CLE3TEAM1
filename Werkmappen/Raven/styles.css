@@ -1,10 +1,10 @@
 :root {
-    --background-color: #ffffff;
+    --background-color: #dddddd;
     --text-color: #000000;
-    --card-color: #eeeeee;
-    --button-color: #2c2c2c;
+    --card-color: #aaaaaa;
+    --button-color: #333333;
     --button-text: #ffffff;
-    --selected-color: #bbbbbb;
+    --selected-color: #999999;
 }
 
 body {
@@ -66,8 +66,7 @@ h1 {
 .card {
     box-sizing: border-box;
     background: var(--card-color);
-    border: 3px solid #cccccc;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 10px;
     padding: 10px;
     width: 160px;
@@ -92,6 +91,7 @@ img {
 .buttonLayOut button {
     margin-top: 30px;
     padding: 5px 5px;
+    border: none;
     border-radius: 10px;
     background-color: var(--button-color);
     color: var(--button-text);

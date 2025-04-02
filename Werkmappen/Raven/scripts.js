@@ -111,7 +111,7 @@ function cartShow() {
         cartActive = true
         cardsData = cart
         filteredCards = cart
-        shoppingCart.innerHTML = "<i class=\"fa-solid fa-clipboard\" style=\"color: #ffffff;\"></i>\n" +
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-clipboard buttonIcon buttonLayOut\" style=\"color: #ffffff;\"></i>\n" +
             "                    Menu"
         // filters weg
         console.log(filters)
