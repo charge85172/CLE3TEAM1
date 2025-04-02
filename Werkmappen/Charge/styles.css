@@ -1,8 +1,31 @@
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --card-color: #eeeeee;
+    --button-color: #2c2c2c;
+    --button-text: #ffffff;
+    --selected-color: #b3b3b3;
+}
+
 body {
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 730px;
+    height: 100%;
+    margin: 0;
+}
+
+h1 {
+    font-size: 5rem;
 }
 
 .container {
@@ -11,45 +34,109 @@ body {
     text-align: center;
 }
 
-.filters {
-    margin-bottom: 20px;
+/*Move between pages*/
+#prevPage, #nextPage {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
 }
 
-.filters button {
-    margin: 0 10px;
-    padding: 10px 15px;
+.arrow {
+    font-size: 12em;
 }
 
-.card-container {
+/*necessary evil*/
+.card-filter-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    align-items: flex-start;
+}
+
+/*cards*/
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(3, auto); /* 3 rows */
+    gap: 10px;
+    justify-items: center;
+    width: 100%;
 }
 
 .card {
-    background: white;
-    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background: var(--card-color);
+    border: 3px solid #cccccc;
     border-radius: 5px;
     margin: 10px;
-    padding: 15px;
+    padding: 10px;
     width: 200px;
     text-align: center;
 }
 
-.card img {
+img {
     max-width: 100%;
     height: auto;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-.navigation {
-    margin: 20px 0;
+
+/*buttons*/
+.buttonLayOut {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.navigation button {
-    margin: 0 10px;
-    padding: 10px 15px;
+.buttonLayOut button {
+    margin-top: 20px;
+    padding: 15px 15px;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    font-size: 1.5rem;
+}
+
+.buttonLayOut button:active {
+    background-color: var(--selected-color);
+    color: var(--text-color);
+    transition: 0.3s ease;
+}
+
+.buttonIcon {
+    font-size: 2em;
+    padding: 2vw;
 }
 
 #cartButton {
+    grid-column: span 3;
+    justify-self: center;
     padding: 10px 15px;
+    margin-top: 20px;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    font-size: 1.2rem;
+}
+
+
+/*media REEEEEEEE*/
+@media (min-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+        box-sizing: border-box;
+        background: var(--card-color);
+        border: 3px solid #cccccc;
+        border-radius: 5px;
+        margin: 10px;
+        padding: 10px;
+        width: 168px;
+        text-align: center;
+    }
+
+    #cartButton {
+        grid-column: span 3;
+    }
 }

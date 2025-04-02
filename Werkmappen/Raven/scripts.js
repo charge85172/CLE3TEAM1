@@ -33,6 +33,7 @@ function pageHandler(data) {
 
     // Initial render
     renderCards();
+    activateFilters()
 }
 
 // Function to render cards
@@ -76,17 +77,45 @@ const shoppingCart = document.getElementById('cartButton');
 shoppingCart.addEventListener('click', cartShow);
 
 function cartShow() {
+    // een toggle could shorten the entire thing, since it repeats code a lot and requires the listeners to be added again.
+    let filters = document.getElementsByClassName("filters")[0]
     if (cartActive) {
         cartActive = false
         cardsData = pageCardData
         filteredCards = cardsData
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Winkelwagen"
-    } else {
+        // filters terug
+        console.log(filters)
+        filters.innerHTML = "<button id=\"veganFilter\">\n" +
+            "                        <i class=\"fa-solid fa-seedling buttonIcon\" style=\"color: #63E6BE;\"></i>\n" +
+            "                        vegatarisch\n" +
+            "                    </button>\n" +
+            "\n" +
+            "                    <button id=\"lactoFreeFilter\">\n" +
+            "                        <i class=\"fa-solid fa-cheese buttonIcon\" style=\"color: #FFD43B;\"></i>\n" +
+            "                        Lactosevrij\n" +
+            "                    </button>\n" +
+            "\n" +
+            "                    <button id=\"glutenFreeFilter\">\n" +
+            "                        <i class=\"fa-solid fa-wheat-awn buttonIcon\" style=\"color: #FFD43B;\"></i>\n" +
+            "                        Glutenvrij\n" +
+            "                    </button>\n" +
+            "\n" +
+            "                    <button id=\"nutFreeFilter\">\n" +
+            "                        <i class=\"fa-solid fa-jar buttonIcon\" style=\"color: #bb854b;\"></i>\n" +
+            "                        Notenvrij\n" +
+            "                    </button>"
+        activateFilters()
+    } else {// do toggle code die dan aan en dan terug gaat
         cartActive = true
         cardsData = cart
         filteredCards = cart
-        shoppingCart.innerHTML = "Menu"
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-clipboard\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Menu"
+        // filters weg
+        console.log(filters)
+        filters.innerHTML = ""
     }
     currentPage = 0
     renderCards();
@@ -111,25 +140,16 @@ function applyFilters() {
 }
 
 // Event listeners for filter buttons
-document.getElementById('veganFilter').addEventListener('click', function () {
-    this.classList.toggle('active');
-    applyFilters();
-});
+function activateFilters() {
+    let filters = ['veganFilter', 'lactoFreeFilter', 'glutenFreeFilter', 'nutFreeFilter']
+    for (const filter of filters) {
+        document.getElementById(filter).addEventListener('click', function () {
+            this.classList.toggle('active');
+            applyFilters();
+        });
+    }
+}
 
-document.getElementById('lactoFreeFilter').addEventListener('click', function () {
-    this.classList.toggle('active');
-    applyFilters();
-});
-
-document.getElementById('glutenFreeFilter').addEventListener('click', function () {
-    this.classList.toggle('active');
-    applyFilters();
-});
-
-document.getElementById('nutFreeFilter').addEventListener('click', function () { // New event listener
-    this.classList.toggle('active');
-    applyFilters();
-});
 
 // Pagination functions
 document.getElementById('nextPage').addEventListener('click', function () {
@@ -145,3 +165,5 @@ document.getElementById('prevPage').addEventListener('click', function () {
         renderCards();
     }
 });
+
+window.scrollTo(0, 1);

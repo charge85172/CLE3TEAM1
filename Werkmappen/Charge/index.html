@@ -1,34 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="NL">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charge Food Cards</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/3eb90fd1ee.js" crossorigin="anonymous"></script>
+    <title>Food Card Final</title>
 </head>
 <body>
-<div class="container">
-    <h1>Food Collection</h1>
 
-    <div class="filters">
-        <button id="veganFilter">Vegan</button>
-        <button id="lactoFreeFilter">Geen melk</button>
-        <button id="glutenFreeFilter">Geen gluten</button>
-        <button id="nutFreeFilter">Geen noten</button>
+<header>
+    <button id="prevPage" class="arrow"><i class="fa-solid fa-left-long"></i></button>
+    <h1>Eten</h1>
+    <button id="nextPage" class="arrow"><i class="fa-solid fa-right-long"></i></button>
+</header>
+
+<main>
+
+    <div class="container">
+
+        <div class="card-filter-container">
+
+            <div class="card-container" id="cardContainer">
+                <!-- Cards will be dynamically generated here -->
+            </div>
+
+            <div class="buttonLayOut">
+
+                <div class="filters">
+
+                    <button id="veganFilter">
+                        <i class="fa-solid fa-seedling buttonIcon" style="color: #63E6BE;"></i>
+                        vegatarisch
+                    </button>
+
+                    <button id="lactoFreeFilter">
+                        <i class="fa-solid fa-cheese buttonIcon" style="color: #FFD43B;"></i>
+                        Lactosevrij
+                    </button>
+
+                    <button id="glutenFreeFilter">
+                        <i class="fa-solid fa-wheat-awn buttonIcon" style="color: #FFD43B;"></i>
+                        Glutenvrij
+                    </button>
+
+                    <button id="nutFreeFilter">
+                        <i class="fa-solid fa-jar buttonIcon" style="color: #bb854b;"></i>
+                        Notenvrij
+                    </button>
+
+                </div>
+
+                <button id="cartButton">
+                    <i class="fa-solid fa-cart-shopping buttonIcon" style="color: #ffffff;"></i>
+                    Winkelwagen
+                </button>
+
+            </div>
+
+
+        </div>
+
+
     </div>
 
-    <div class="card-container" id="cardContainer">
-        <!-- Cards will be dynamically generated here -->
-    </div>
 
-    <div class="navigation">
-        <button id="prevPage">Previous</button>
-        <button id="nextPage">Next</button>
-    </div>
-
-    <button id="cartButton">Shopping Cart</button>
-</div>
+</main>
 
 <script src="scripts.js"></script>
+
 </body>
 </html>
