@@ -155,22 +155,57 @@ function activateFilters() {
 document.getElementById('nextPage').addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
         currentPage++;
-        renderCards();
+        //switch ?
     } else {
-        //remove arrow or next menu
-        // remove at deserts currentpage= end
-        //next menu = pagecarddata, cardData, filteredCards
-        // currentpage =begin
+        if (pageCardData === deserts) {
+            //remove the arrow
+        } else {
+            //load next page
+            if (pageCardData === drinks) {
+                pageCardData = deserts
+            }
+            if (pageCardData === dishes) {
+                pageCardData = drinks
+            }
+            //update cardsData
+            cardsData = pageCardData
+            filteredCards = cardsData
+            // to first page of cardsData
+            currentPage = 0
+        }
     }
+    renderCards();
+    console.log(currentPage)
+
 });
 
 document.getElementById('prevPage').addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage--;
-        renderCards();
     } else {
-        // remove arrow/ previous menu
-        // remove at dishes , currentPage=0
-        //succes (previous menu): currentPage= begin
+        // remove arrow
+        if (pageCardData === dishes) {
+            //remove DOMarrow
+        } else {
+            //load previous page
+            if (pageCardData === drinks) {
+                pageCardData = dishes
+            }
+            if (pageCardData === deserts) {
+                pageCardData = drinks
+            }
+            //update cardsData
+            cardsData = pageCardData
+            filteredCards = cardsData
+
+            // to last page of cardsData
+            if (Math.round(cardsData.length / itemsPerPage) < cardsData.length / itemsPerPage) {
+                currentPage = Math.round(cardsData.length / itemsPerPage)
+            } else {
+                currentPage = Math.round(cardsData.length / itemsPerPage) - 1
+            }
+            console.log(currentPage)
+        }
     }
+    renderCards();
 });
