@@ -4,7 +4,7 @@
     --card-color: #eeeeee;
     --button-color: #2c2c2c;
     --button-text: #ffffff;
-    --selected-color: #b3b3b3;
+    --selected-color: #bbbbbb;
 }
 
 body {
@@ -92,16 +92,18 @@ img {
 .buttonLayOut button {
     margin-top: 20px;
     padding: 15px 15px;
+    border-radius: 10px;
     background-color: var(--button-color);
     color: var(--button-text);
     font-size: 1.5rem;
 }
 
-.buttonLayOut button:active {
+.buttonLayOut button.active {
     background-color: var(--selected-color);
     color: var(--text-color);
-    transition: 0.3s ease;
+    transition: background-color 0.3s ease;
 }
+
 
 .buttonIcon {
     font-size: 2em;
