@@ -165,3 +165,5 @@ document.getElementById('prevPage').addEventListener('click', function () {
         renderCards();
     }
 });
+
+window.scrollTo(0, 1);
