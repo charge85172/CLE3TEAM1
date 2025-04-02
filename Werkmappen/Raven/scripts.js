@@ -1,4 +1,3 @@
-// if cartactive -> clicking filter returns the menu, while cartactive => remove filterbuttons/return to menu/filter in cart
 let pageCardData
 let cardsData
 let filteredCards
@@ -77,17 +76,17 @@ const shoppingCart = document.getElementById('cartButton');
 shoppingCart.addEventListener('click', cartShow);
 
 function cartShow() {
-    if (!cartActive) {
-        cartActive = true
-        cardsData = cart
-        filteredCards = cart
-        shoppingCart.innerHTML = "Menu"
-    } else {
+    if (cartActive) {
         cartActive = false
         cardsData = pageCardData
         filteredCards = cardsData
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Winkelwagen"
+    } else {
+        cartActive = true
+        cardsData = cart
+        filteredCards = cart
+        shoppingCart.innerHTML = "Menu"
     }
     currentPage = 0
     renderCards();
