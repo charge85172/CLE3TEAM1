@@ -156,6 +156,11 @@ document.getElementById('nextPage').addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
         currentPage++;
         renderCards();
+    } else {
+        //remove arrow or next menu
+        // remove at deserts currentpage= end
+        //next menu = pagecarddata, cardData, filteredCards
+        // currentpage =begin
     }
 });
 
@@ -163,5 +168,9 @@ document.getElementById('prevPage').addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage--;
         renderCards();
+    } else {
+        // remove arrow/ previous menu
+        // remove at dishes , currentPage=0
+        //succes (previous menu): currentPage= begin
     }
 });
