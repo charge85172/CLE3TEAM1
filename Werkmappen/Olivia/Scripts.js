@@ -4,8 +4,15 @@ let filteredCards
 let dishes
 let drinks
 let deserts
+
 let currentPage = 0;
 const itemsPerPage = 9;
+
+const prevButton = document.getElementById('prevPage');
+const nextButton = document.getElementById('nextPage');
+const title = document.getElementsByTagName("h1")[0]
+prevButton.innerText = "← Previous Page";
+nextButton.innerText = "Next Page →";
 
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -34,6 +41,7 @@ function pageHandler(data) {
     // Initial render
     renderCards();
     activateFilters()
+    updatePaginationButtons()
 }
 
 // Function to render cards
@@ -152,60 +160,58 @@ function activateFilters() {
 
 
 // Pagination functions
-document.getElementById('nextPage').addEventListener('click', function () {
+
+;// Disable buttons when necessary
+function updatePaginationButtons() {
+    prevButton.disabled = currentPage === 0 && pageCardData === dishes;
+    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && pageCardData === deserts;
+}
+
+// nextButton Event Handler
+nextButton.addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
         currentPage++;
-        //switch ?
     } else {
-        if (pageCardData === deserts) {
-            //remove the arrow
-        } else {
-            //load next page
-            if (pageCardData === drinks) {
-                pageCardData = deserts
-            }
-            if (pageCardData === dishes) {
-                pageCardData = drinks
-            }
-            //update cardsData
-            cardsData = pageCardData
-            filteredCards = cardsData
-            // to first page of cardsData
-            currentPage = 0
+        //load next page
+        if (pageCardData === drinks) {
+            pageCardData = deserts
+            title.innerText = 'Nagerechten'
         }
+        if (pageCardData === dishes) {
+            pageCardData = drinks
+            title.innerText = 'Drinken'
+        }
+        //update cardsData
+        cardsData = pageCardData
+        filteredCards = cardsData
+        // to first page of cardsData
+        currentPage = 0
     }
+    updatePaginationButtons()
     renderCards();
-    console.log(currentPage)
-
 });
-
-document.getElementById('prevPage').addEventListener('click', function () {
+// prevButton Event Handler
+prevButton.addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage--;
     } else {
-        // remove arrow
-        if (pageCardData === dishes) {
-            //remove DOMarrow
-        } else {
-            //load previous page
-            if (pageCardData === drinks) {
-                pageCardData = dishes
-            }
-            if (pageCardData === deserts) {
-                pageCardData = drinks
-            }
-            //update cardsData
-            cardsData = pageCardData
-            filteredCards = cardsData
-
-            // to last page of cardsData
-            if (Math.round(cardsData.length / itemsPerPage) < cardsData.length / itemsPerPage) {
-                currentPage = Math.round(cardsData.length / itemsPerPage)
-            } else {
-                currentPage = Math.round(cardsData.length / itemsPerPage) - 1
-            }
-            console.log(currentPage)
+        //load previous page
+        if (pageCardData === drinks) {
+            pageCardData = dishes
+            title.innerText = 'Eten'
         }
+        if (pageCardData === deserts) {
+            pageCardData = drinks
+            title.innerText = 'Drinken'
+        }
+        //update cardsData
+        cardsData = pageCardData
+        filteredCards = cardsData
+
+        // to last page of cardsData
+        currentPage = Math.ceil(cardsData.length / itemsPerPage) - 1
     }
+    updatePaginationButtons()
     renderCards();
 });
+
