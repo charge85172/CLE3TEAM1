@@ -1,28 +1,49 @@
-const cardsData = [
-    { title: "Vegan Salad", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true, nutFree: true },
-    { title: "Lacto Free Cheese", image: "https://via.placeholder.com/150", vegan: false, lactoFree: true, glutenFree: true, nutFree: true },
-    { title: "Gluten Free Bread", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true, nutFree: true },
-    { title: "Fruit Smoothie", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true, nutFree: true },
-    { title: "Chicken Salad", image: "https://via.placeholder.com/150", vegan: false, lactoFree: true, glutenFree: true, nutFree: false },
-    { title: "Vegan Burger", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: false, nutFree: true },
-    { title: "Pasta", image: "https://via.placeholder.com/150", vegan: false, lactoFree: false, glutenFree: false, nutFree: false },
-    { title: "Quinoa Bowl", image: "https://via.placeholder.com/150", vegan: true, lactoFree: true, glutenFree: true, nutFree: true },
-    { title: "Chocolate Cake", image: "https://via.placeholder.com/150", vegan: false, lactoFree: false, glutenFree: false, nutFree: false },
-];
-
+let pageCardData
+let cardsData
+let filteredCards
+let dishes
+let drinks
+let deserts
 let currentPage = 0;
-const itemsPerPage = 3;
-let filteredCards = cardsData;
-let cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
+const itemsPerPage = 9;
+
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cartActive = false
+fetch("products.JSON")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        }
+        return response.json()
+    })
+    .then(pageHandler)
+    .catch(error => console.log(error))
+
+
+function pageHandler(data) {
+    dishes = data.dishes
+    drinks = data.drinks
+    deserts = data.deserts
+
+    //if page= something =>
+    pageCardData = dishes
+    cardsData = pageCardData
+    filteredCards = cardsData
+
+    // Initial render
+    renderCards();
+    activateFilters()
+}
 
 // Function to render cards
 function renderCards() {
     const cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
 
-    const start = currentPage * itemsPerPage;
-    const end = start + itemsPerPage;
-    const cardsToDisplay = filteredCards.slice(start, end);
+    const firstItem = currentPage * itemsPerPage;
+    const lastItem = firstItem + itemsPerPage;
+    const cardsToDisplay = filteredCards.slice(firstItem, lastItem);
 
     cardsToDisplay.forEach(card => {
         const cardElement = document.createElement('div');
@@ -31,16 +52,73 @@ function renderCards() {
             <img src="${card.image}" alt="${card.title}">
             <h3>${card.title}</h3>
         `;
-        cardElement.addEventListener('click', () => addToCart(card)); // Add click event to add to cart
+        cardElement.addEventListener('click', () => !cartActive ? addToCart(card) : removeFromCart(card));
         cardContainer.appendChild(cardElement);
     });
 }
 
-// Function to add item to cart
+// Functions to add and remove item to cart
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
     alert(`${item.title} has been added to your cart!`);
+}
+
+function removeFromCart(item) {
+    cart.splice(cart.indexOf(item), 1)
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${item.title} has been removed from your cart!`);
+    //update de winkelwagen
+    renderCards()
+}
+
+//cart showing functions
+const shoppingCart = document.getElementById('cartButton');
+shoppingCart.addEventListener('click', cartShow);
+
+function cartShow() {
+    // een toggle could shorten the entire thing, since it repeats code a lot and requires the listeners to be added again.
+    let filters = document.getElementsByClassName("filters")[0]
+    if (cartActive) {
+        cartActive = false
+        cardsData = pageCardData
+        filteredCards = cardsData
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Winkelwagen"
+        // filters terug
+        console.log(filters)
+        filters.innerHTML = "<button id=\"veganFilter\">\n" +
+            "                        <i class=\"fa-solid fa-seedling buttonIcon\" style=\"color: #63E6BE;\"></i>\n" +
+            "                        vegatarisch\n" +
+            "                    </button>\n" +
+            "\n" +
+            "                    <button id=\"lactoFreeFilter\">\n" +
+            "                        <i class=\"fa-solid fa-cheese buttonIcon\" style=\"color: #FFD43B;\"></i>\n" +
+            "                        Lactosevrij\n" +
+            "                    </button>\n" +
+            "\n" +
+            "                    <button id=\"glutenFreeFilter\">\n" +
+            "                        <i class=\"fa-solid fa-wheat-awn buttonIcon\" style=\"color: #FFD43B;\"></i>\n" +
+            "                        Glutenvrij\n" +
+            "                    </button>\n" +
+            "\n" +
+            "                    <button id=\"nutFreeFilter\">\n" +
+            "                        <i class=\"fa-solid fa-jar buttonIcon\" style=\"color: #bb854b;\"></i>\n" +
+            "                        Notenvrij\n" +
+            "                    </button>"
+        activateFilters()
+    } else {// do toggle code die dan aan en dan terug gaat
+        cartActive = true
+        cardsData = cart
+        filteredCards = cart
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
+            "                    Menu"
+        // filters weg
+        console.log(filters)
+        filters.innerHTML = ""
+    }
+    currentPage = 0
+    renderCards();
 }
 
 // Function to handle filters
@@ -62,40 +140,28 @@ function applyFilters() {
 }
 
 // Event listeners for filter buttons
-document.getElementById('veganFilter').addEventListener('click', function() {
-    this.classList.toggle('active');
-    applyFilters();
-});
+function activateFilters() {
+    let filters = ['veganFilter', 'lactoFreeFilter', 'glutenFreeFilter', 'nutFreeFilter']
+    for (const filter of filters) {
+        document.getElementById(filter).addEventListener('click', function () {
+            this.classList.toggle('active');
+            applyFilters();
+        });
+    }
+}
 
-document.getElementById('lactoFreeFilter').addEventListener('click', function() {
-    this.classList.toggle('active');
-    applyFilters();
-});
-
-document.getElementById('glutenFreeFilter').addEventListener('click', function() {
-    this.classList.toggle('active');
-    applyFilters();
-});
-
-document.getElementById('nutFreeFilter').addEventListener('click', function() { // New event listener
-    this.classList.toggle('active');
-    applyFilters();
-});
 
 // Pagination functions
-document.getElementById('nextPage').addEventListener('click', function() {
+document.getElementById('nextPage').addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
         currentPage++;
         renderCards();
     }
 });
 
-document.getElementById('prevPage').addEventListener('click', function() {
+document.getElementById('prevPage').addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage--;
         renderCards();
     }
 });
-
-// Initial render
-renderCards();

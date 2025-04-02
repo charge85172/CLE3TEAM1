@@ -33,7 +33,7 @@ function pageHandler(data) {
 
     // Initial render
     renderCards();
-    activateFilters()
+    activateFilters();
 }
 
 // Function to render cards
