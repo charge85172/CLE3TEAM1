@@ -1,10 +1,11 @@
 let pageCardData
 let cardsData
 let filteredCards
-let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen']
 let dishes
 let drinks
 let deserts
+let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen']
+
 
 let currentPage = 0;
 const itemsPerPage = 9;
@@ -12,6 +13,7 @@ const itemsPerPage = 9;
 const prevButton = document.getElementById('prevPage');
 const nextButton = document.getElementById('nextPage');
 const title = document.getElementsByTagName("h1")[0]
+// const subTitle = document.getElementById('subTitle')
 
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -114,10 +116,16 @@ function cartShow() {
             "                        Notenvrij\n" +
             "                    </button>"
         // title update
-        title.innerText = 'Winkelwagen'
-        title.className = 'shopping_cart'
+        for (let i = 0; i < 3; i++) {
+            const menus = [dishes, drinks, deserts]
+            if (pageCardData === menus[i]) {
+                title.innerText = menuNames[i]
+            }
+        }
+        title.className = 'title'
+        // subTitle.innerText = ''
         activateFilters()
-    } else {// do toggle code die dan aan en dan terug gaat
+    } else {
         cartActive = true
         cardsData = cart
         filteredCards = cart
@@ -128,6 +136,9 @@ function cartShow() {
         // title update
         title.innerText = 'Winkelwagen'
         title.className = 'shopping_cart'
+        // subTitle.innerText = 'test'
+
+
     }
     currentPage = 0
     renderCards();
@@ -218,4 +229,3 @@ prevButton.addEventListener('click', function () {
     updatePaginationButtons()
     renderCards();
 });
-
