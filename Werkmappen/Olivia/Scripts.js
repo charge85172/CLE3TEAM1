@@ -79,6 +79,7 @@ function removeFromCart(item) {
     alert(`${item.title} has been removed from your cart!`);
     //update de winkelwagen
     renderCards()
+    updatePaginationButtons()
 }
 
 //cart showing functions

@@ -79,6 +79,7 @@ function removeFromCart(item) {
     alert(`${item.title} has been removed from your cart!`);
     //update de winkelwagen
     renderCards()
+    updatePaginationButtons()
 }
 
 //cart showing functions
@@ -175,7 +176,7 @@ function activateFilters() {
 
 // Pagination functions
 
-;// Disable buttons when necessary
+// Disable buttons when necessary
 function updatePaginationButtons() {
     prevButton.disabled = currentPage === 0 && (pageCardData === drinks || cardsData === cart);
     nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && (pageCardData === deserts || cardsData === cart);
