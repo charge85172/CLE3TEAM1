@@ -26,7 +26,7 @@ header {
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 .container {
@@ -121,5 +121,22 @@ img {
     color: var(--button-text);
     font-size: 1.2rem;
 }
+
+/*shopping cart*/
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.cart-subtext {
+    font-size: 1.5rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+
 
 

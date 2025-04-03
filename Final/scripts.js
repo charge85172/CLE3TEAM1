@@ -70,13 +70,16 @@ function renderCards() {
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
-    alert(`${item.title} has been added to your cart!`);
+    alert(`${item.title} is aan winkelwagen toegevoegd!`);
 }
 
 function removeFromCart(item) {
     cart.splice(cart.indexOf(item), 1)
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${item.title} has been removed from your cart!`);
+    alert(`${item.title} is uit winkelwagen verwijderd!`);
+
+    if (currentPage > 0 && currentPage * itemsPerPage >= cart.length) currentPage--;
+
     //update de winkelwagen
     renderCards()
     updatePaginationButtons()
@@ -89,12 +92,26 @@ shoppingCart.addEventListener('click', cartShow);
 function cartShow() {
     // een toggle could shorten the entire thing, since it repeats code a lot and requires the listeners to be added again.
     let filters = document.getElementsByClassName("filters")[0]
+    let subText = document.getElementById("cartSubText");
+
+    if (!subText) {
+        subText = document.createElement("p");
+        subText.id = "cartSubText";
+        subText.className = "cart-subtext";
+        title.parentNode.insertBefore(subText, title.nextSibling);
+    }
+
     if (cartActive) {
         cartActive = false
         cardsData = pageCardData
         filteredCards = cardsData
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Winkelwagen"
+
+        if (subText) {
+            subText.remove();
+        }
+
         // filters terug
         console.log(filters)
         filters.innerHTML = "<button id=\"veganFilter\">\n" +
@@ -136,7 +153,7 @@ function cartShow() {
         // title update
         title.innerText = 'Winkelwagen'
         title.className = 'shopping_cart'
-
+        subText.innerText = "Klik op gerecht om het te verwijderen";
 
     }
     currentPage = 0
@@ -181,7 +198,6 @@ function updatePaginationButtons() {
     prevButton.disabled = currentPage === 0 && (pageCardData === drinks || cardsData === cart);
     nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && (pageCardData === deserts || cardsData === cart);
 }
-
 // nextButton Event Handler
 nextButton.addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
