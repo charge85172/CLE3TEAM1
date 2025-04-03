@@ -166,4 +166,6 @@ document.getElementById('prevPage').addEventListener('click', function () {
     }
 });
 
+window.scrollTo(0, 1); // Moves page slightly to hide address bar
+
 window.scrollTo(0, 1);

@@ -164,4 +164,35 @@ document.getElementById('prevPage').addEventListener('click', function () {
         currentPage--;
         renderCards();
     }
+})
+
+const prevButton = document.getElementById('prevPage');
+const nextButton = document.getElementById('nextPage');
+
+prevButton.innerText = "← Previous Page";
+nextButton.innerText = "Next Page →";
+
+prevButton.addEventListener('click', function () {
+    if (currentPage > 0) {
+        currentPage--;
+        renderCards();
+    }
+    updatePaginationButtons();
 });
+
+nextButton.addEventListener('click', function () {
+    if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
+        currentPage++;
+        renderCards();
+    }
+    updatePaginationButtons();
+});
+
+// Disable buttons when necessary
+function updatePaginationButtons() {
+    prevButton.disabled = currentPage === 0;
+    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length;
+}
+
+// Call once to initialize the button states
+updatePaginationButtons();
