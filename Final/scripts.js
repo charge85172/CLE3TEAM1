@@ -13,7 +13,7 @@ const itemsPerPage = 9;
 const prevButton = document.getElementById('prevPage');
 const nextButton = document.getElementById('nextPage');
 const title = document.getElementsByTagName("h1")[0]
-// const subTitle = document.getElementById('subTitle')
+
 
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -123,7 +123,6 @@ function cartShow() {
             }
         }
         title.className = 'title'
-        // subTitle.innerText = ''
         activateFilters()
     } else {
         cartActive = true
@@ -136,12 +135,12 @@ function cartShow() {
         // title update
         title.innerText = 'Winkelwagen'
         title.className = 'shopping_cart'
-        // subTitle.innerText = 'test'
 
 
     }
     currentPage = 0
     renderCards();
+    updatePaginationButtons()
 }
 
 // Function to handle filters
@@ -178,8 +177,8 @@ function activateFilters() {
 
 ;// Disable buttons when necessary
 function updatePaginationButtons() {
-    prevButton.disabled = currentPage === 0 && pageCardData === drinks;
-    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && pageCardData === deserts;
+    prevButton.disabled = currentPage === 0 && (pageCardData === drinks || cardsData === cart);
+    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && (pageCardData === deserts || cardsData === cart);
 }
 
 // nextButton Event Handler
@@ -188,11 +187,11 @@ nextButton.addEventListener('click', function () {
         currentPage++;
     } else {
         //load next page
-        if (pageCardData === dishes) {
+        if (cardsData === dishes) {
             pageCardData = deserts
             title.innerText = menuNames[2]
         }
-        if (pageCardData === drinks) {
+        if (cardsData === drinks) {
             pageCardData = dishes
             title.innerText = menuNames[0]
         }
@@ -211,11 +210,11 @@ prevButton.addEventListener('click', function () {
         currentPage--;
     } else {
         //load previous page
-        if (pageCardData === dishes) {
+        if (cardsData === dishes) {
             pageCardData = drinks
             title.innerText = menuNames[1]
         }
-        if (pageCardData === deserts) {
+        if (cardsData === deserts) {
             pageCardData = dishes
             title.innerText = menuNames[0]
         }
