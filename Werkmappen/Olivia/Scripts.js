@@ -11,8 +11,8 @@ const itemsPerPage = 9;
 const prevButton = document.getElementById('prevPage');
 const nextButton = document.getElementById('nextPage');
 const title = document.getElementsByTagName("h1")[0]
-prevButton.innerText = "← Previous Page";
-nextButton.innerText = "Next Page →";
+// prevButton.innerText = "← Previous Page";
+// nextButton.innerText = "Next Page →";
 
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
