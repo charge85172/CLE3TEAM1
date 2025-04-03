@@ -146,7 +146,7 @@
     },
     {
       "title": "pizza margherita",
-      "image": "images/pizza_margherite.jpg",
+      "image": "images/pizza_margherita.jpg",
       "description": "pizza met tomatensaus, kaas, basilicum en mozzarella",
       "vegan": true,
       "lactoFree": false,
@@ -555,7 +555,7 @@
     },
     {
       "title": "gekarameliseerde vruchten",
-      "image": "images/gekarmeliseerde_vruchten.jpg",
+      "image": "images/gekarameliseerde_vruchten.jpg",
       "description": "stukken gebakken banaan, appel en sinaasappel met een laagje karamel",
       "vegan": true,
       "lactoFree": true,
@@ -564,7 +564,7 @@
     },
     {
       "title": "opgeklopte stofzuiger",
-      "image": "",
+      "image": "images/opgeklopte_stofzuiger.jpeg",
       "description": "stukjes bebakken vruchten tussen koek met een bolletje vega slagroomijs erbovenop, een gekarameliseerde banaan als stofzuigerslang die uitkomt bij een gekarameliseerd sinaasappel als stofzuigerhoofd met cacoapoeder en poedersuiker eroverheen",
       "vegan": true,
       "lactoFree": true,

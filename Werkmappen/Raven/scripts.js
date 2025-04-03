@@ -1,10 +1,11 @@
 let pageCardData
 let cardsData
 let filteredCards
-let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen']
 let dishes
 let drinks
 let deserts
+let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen']
+
 
 let currentPage = 0;
 const itemsPerPage = 9;
@@ -12,6 +13,7 @@ const itemsPerPage = 9;
 const prevButton = document.getElementById('prevPage');
 const nextButton = document.getElementById('nextPage');
 const title = document.getElementsByTagName("h1")[0]
+
 
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -68,15 +70,19 @@ function renderCards() {
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
-    alert(`${item.title} is aan je winkelwagen toegevoegd!`);
+    alert(`${item.title} is aan winkelwagen toegevoegd!`);
 }
 
 function removeFromCart(item) {
     cart.splice(cart.indexOf(item), 1)
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${item.title} is uit je winkelwagen gehaald!`);
+    alert(`${item.title} is uit winkelwagen verwijderd!`);
+
+    if (currentPage > 0 && currentPage * itemsPerPage >= cart.length) currentPage--;
+
     //update de winkelwagen
     renderCards()
+    updatePaginationButtons()
 }
 
 //cart showing functions
@@ -86,12 +92,26 @@ shoppingCart.addEventListener('click', cartShow);
 function cartShow() {
     // een toggle could shorten the entire thing, since it repeats code a lot and requires the listeners to be added again.
     let filters = document.getElementsByClassName("filters")[0]
+    let subText = document.getElementById("cartSubText");
+
+    if (!subText) {
+        subText = document.createElement("p");
+        subText.id = "cartSubText";
+        subText.className = "cart-subtext";
+        title.parentNode.insertBefore(subText, title.nextSibling);
+    }
+
     if (cartActive) {
         cartActive = false
         cardsData = pageCardData
         filteredCards = cardsData
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Winkelwagen"
+
+        if (subText) {
+            subText.remove();
+        }
+
         // filters terug
         console.log(filters)
         filters.innerHTML = "<button id=\"veganFilter\">\n" +
@@ -114,10 +134,15 @@ function cartShow() {
             "                        Notenvrij\n" +
             "                    </button>"
         // title update
-        title.innerText = 'Winkelwagen'
-        title.className = 'shopping_cart'
+        for (let i = 0; i < 3; i++) {
+            const menus = [dishes, drinks, deserts]
+            if (pageCardData === menus[i]) {
+                title.innerText = menuNames[i]
+            }
+        }
+        title.className = 'title'
         activateFilters()
-    } else {// do toggle code die dan aan en dan terug gaat
+    } else {
         cartActive = true
         cardsData = cart
         filteredCards = cart
@@ -128,9 +153,12 @@ function cartShow() {
         // title update
         title.innerText = 'Winkelwagen'
         title.className = 'shopping_cart'
+        subText.innerText = "Klik op gerecht om het te verwijderen";
+
     }
     currentPage = 0
     renderCards();
+    updatePaginationButtons()
 }
 
 // Function to handle filters
@@ -165,23 +193,22 @@ function activateFilters() {
 
 // Pagination functions
 
-;// Disable buttons when necessary
+// Disable buttons when necessary
 function updatePaginationButtons() {
-    prevButton.disabled = currentPage === 0 && pageCardData === drinks;
-    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && pageCardData === deserts;
+    prevButton.disabled = currentPage === 0 && (pageCardData === drinks || cardsData === cart);
+    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && (pageCardData === deserts || cardsData === cart);
 }
-
 // nextButton Event Handler
 nextButton.addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
         currentPage++;
     } else {
         //load next page
-        if (pageCardData === dishes) {
+        if (cardsData === dishes) {
             pageCardData = deserts
             title.innerText = menuNames[2]
         }
-        if (pageCardData === drinks) {
+        if (cardsData === drinks) {
             pageCardData = dishes
             title.innerText = menuNames[0]
         }
@@ -200,11 +227,11 @@ prevButton.addEventListener('click', function () {
         currentPage--;
     } else {
         //load previous page
-        if (pageCardData === dishes) {
+        if (cardsData === dishes) {
             pageCardData = drinks
             title.innerText = menuNames[1]
         }
-        if (pageCardData === deserts) {
+        if (cardsData === deserts) {
             pageCardData = dishes
             title.innerText = menuNames[0]
         }
@@ -218,4 +245,3 @@ prevButton.addEventListener('click', function () {
     updatePaginationButtons()
     renderCards();
 });
-
