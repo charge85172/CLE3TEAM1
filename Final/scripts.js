@@ -173,7 +173,7 @@ nextButton.addEventListener('click', function () {
         //load next page
         if (pageCardData === drinks) {
             pageCardData = deserts
-            title.innerText = 'Nagerechten'
+            title.innerText = 'Toetjes'
         }
         if (pageCardData === dishes) {
             pageCardData = drinks
