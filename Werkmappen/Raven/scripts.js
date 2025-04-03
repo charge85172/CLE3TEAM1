@@ -1,11 +1,17 @@
 let pageCardData
 let cardsData
 let filteredCards
+let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen']
 let dishes
 let drinks
 let deserts
+
 let currentPage = 0;
 const itemsPerPage = 9;
+
+const prevButton = document.getElementById('prevPage');
+const nextButton = document.getElementById('nextPage');
+const title = document.getElementsByTagName("h1")[0]
 
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -27,13 +33,14 @@ function pageHandler(data) {
     deserts = data.deserts
 
     //if page= something =>
-    pageCardData = dishes
+    pageCardData = drinks
     cardsData = pageCardData
     filteredCards = cardsData
 
     // Initial render
     renderCards();
     activateFilters()
+    updatePaginationButtons()
 }
 
 // Function to render cards
@@ -61,13 +68,13 @@ function renderCards() {
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
-    alert(`${item.title} has been added to your cart!`);
+    alert(`${item.title} is aan je winkelwagen toegevoegd!`);
 }
 
 function removeFromCart(item) {
     cart.splice(cart.indexOf(item), 1)
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${item.title} has been removed from your cart!`);
+    alert(`${item.title} is uit je winkelwagen gehaald!`);
     //update de winkelwagen
     renderCards()
 }
@@ -106,16 +113,21 @@ function cartShow() {
             "                        <i class=\"fa-solid fa-jar buttonIcon\" style=\"color: #bb854b;\"></i>\n" +
             "                        Notenvrij\n" +
             "                    </button>"
+        // title update
+        title.innerText = 'Winkelwagen'
+        title.className = 'shopping_cart'
         activateFilters()
     } else {// do toggle code die dan aan en dan terug gaat
         cartActive = true
         cardsData = cart
         filteredCards = cart
-        shoppingCart.innerHTML = "<i class=\"fa-solid fa-clipboard buttonIcon buttonLayOut\" style=\"color: #ffffff;\"></i>\n" +
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Menu"
         // filters weg
-        console.log(filters)
         filters.innerHTML = ""
+        // title update
+        title.innerText = 'Winkelwagen'
+        title.className = 'shopping_cart'
     }
     currentPage = 0
     renderCards();
@@ -152,20 +164,58 @@ function activateFilters() {
 
 
 // Pagination functions
-document.getElementById('nextPage').addEventListener('click', function () {
+
+;// Disable buttons when necessary
+function updatePaginationButtons() {
+    prevButton.disabled = currentPage === 0 && pageCardData === drinks;
+    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && pageCardData === deserts;
+}
+
+// nextButton Event Handler
+nextButton.addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
         currentPage++;
-        renderCards();
+    } else {
+        //load next page
+        if (pageCardData === dishes) {
+            pageCardData = deserts
+            title.innerText = menuNames[2]
+        }
+        if (pageCardData === drinks) {
+            pageCardData = dishes
+            title.innerText = menuNames[0]
+        }
+        //update cardsData
+        cardsData = pageCardData
+        filteredCards = cardsData
+        // to first page of cardsData
+        currentPage = 0
     }
+    updatePaginationButtons()
+    renderCards();
 });
-
-document.getElementById('prevPage').addEventListener('click', function () {
+// prevButton Event Handler
+prevButton.addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage--;
-        renderCards();
+    } else {
+        //load previous page
+        if (pageCardData === dishes) {
+            pageCardData = drinks
+            title.innerText = menuNames[1]
+        }
+        if (pageCardData === deserts) {
+            pageCardData = dishes
+            title.innerText = menuNames[0]
+        }
+        //update cardsData
+        cardsData = pageCardData
+        filteredCards = cardsData
+
+        // to last page of cardsData
+        currentPage = Math.ceil(cardsData.length / itemsPerPage) - 1
     }
+    updatePaginationButtons()
+    renderCards();
 });
 
-window.scrollTo(0, 1); // Moves page slightly to hide address bar
-
-window.scrollTo(0, 1);
