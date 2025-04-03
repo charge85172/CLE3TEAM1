@@ -1,6 +1,7 @@
 let pageCardData
 let cardsData
 let filteredCards
+let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen']
 let dishes
 let drinks
 let deserts
@@ -32,7 +33,7 @@ function pageHandler(data) {
     deserts = data.deserts
 
     //if page= something =>
-    pageCardData = dishes
+    pageCardData = drinks
     cardsData = pageCardData
     filteredCards = cardsData
 
@@ -112,6 +113,9 @@ function cartShow() {
             "                        <i class=\"fa-solid fa-jar buttonIcon\" style=\"color: #bb854b;\"></i>\n" +
             "                        Notenvrij\n" +
             "                    </button>"
+        // title update
+        title.innerText = 'Winkelwagen'
+        title.className = 'shopping_cart'
         activateFilters()
     } else {// do toggle code die dan aan en dan terug gaat
         cartActive = true
@@ -120,8 +124,10 @@ function cartShow() {
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
             "                    Menu"
         // filters weg
-        console.log(filters)
         filters.innerHTML = ""
+        // title update
+        title.innerText = 'Winkelwagen'
+        title.className = 'shopping_cart'
     }
     currentPage = 0
     renderCards();
@@ -161,7 +167,7 @@ function activateFilters() {
 
 ;// Disable buttons when necessary
 function updatePaginationButtons() {
-    prevButton.disabled = currentPage === 0 && pageCardData === dishes;
+    prevButton.disabled = currentPage === 0 && pageCardData === drinks;
     nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && pageCardData === deserts;
 }
 
@@ -171,13 +177,13 @@ nextButton.addEventListener('click', function () {
         currentPage++;
     } else {
         //load next page
-        if (pageCardData === drinks) {
-            pageCardData = deserts
-            title.innerText = 'Nagerechten'
-        }
         if (pageCardData === dishes) {
-            pageCardData = drinks
-            title.innerText = 'Drinken'
+            pageCardData = deserts
+            title.innerText = menuNames[2]
+        }
+        if (pageCardData === drinks) {
+            pageCardData = dishes
+            title.innerText = menuNames[0]
         }
         //update cardsData
         cardsData = pageCardData
@@ -194,13 +200,13 @@ prevButton.addEventListener('click', function () {
         currentPage--;
     } else {
         //load previous page
-        if (pageCardData === drinks) {
-            pageCardData = dishes
-            title.innerText = 'Eten'
+        if (pageCardData === dishes) {
+            pageCardData = drinks
+            title.innerText = menuNames[1]
         }
         if (pageCardData === deserts) {
-            pageCardData = drinks
-            title.innerText = 'Drinken'
+            pageCardData = dishes
+            title.innerText = menuNames[0]
         }
         //update cardsData
         cardsData = pageCardData
