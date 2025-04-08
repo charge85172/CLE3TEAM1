@@ -88,6 +88,7 @@ img {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    max-width: 120px;
 }
 
 .buttonLayOut button {
