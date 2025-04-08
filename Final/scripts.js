@@ -103,7 +103,8 @@ function cartShow() {
         cartActive = false;
         cardsData = pageCardData; // Reset to the current page data
         filteredCards = cardsData; // Reset filtered cards to the current page data
-        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Winkelwagen";
+        shoppingCart.innerHTML = `<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Winkelwagen
+            <span id="cartItemCount">${cart.length}</span>`;
 
         if (subText) {
             subText.remove();
