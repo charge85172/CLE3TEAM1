@@ -33,7 +33,7 @@ function pageHandler(data) {
     deserts = data.deserts;
 
     // Set initial page data
-    pageCardData = drinks;
+    pageCardData = drinks; // Start with drinks
     cardsData = pageCardData;
     filteredCards = cardsData;
 
@@ -41,6 +41,7 @@ function pageHandler(data) {
     renderCards();
     activateFilters();
     updatePaginationButtons();
+    updateCartCount();
 }
 
 // Function to render cards
@@ -68,19 +69,18 @@ function renderCards() {
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
-    alert(`${item.title} is aan winkelwagen toegevoegd!`);
+    updateCartCount();
 }
 
 function removeFromCart(item) {
     cart.splice(cart.indexOf(item), 1);
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${item.title} is uit winkelwagen verwijderd!`);
-
     if (currentPage > 0 && currentPage * itemsPerPage >= cart.length) currentPage--;
 
     // Update the cart
     renderCards();
     updatePaginationButtons();
+    updateCartCount();
 }
 
 // Cart showing functions
@@ -99,9 +99,10 @@ function cartShow() {
     }
 
     if (cartActive) {
+        // Switch back to menu
         cartActive = false;
-        cardsData = pageCardData;
-        filteredCards = cardsData;
+        cardsData = pageCardData; // Reset to the current page data
+        filteredCards = cardsData; // Reset filtered cards to the current page data
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Winkelwagen";
 
         if (subText) {
@@ -137,9 +138,10 @@ function cartShow() {
         title.className = 'title';
         activateFilters();
     } else {
+        // Switch to cart
         cartActive = true;
-        cardsData = cart;
-        filteredCards = cart;
+        cardsData = cart; // Set cardsData to the cart
+        filteredCards = cart; // Set filteredCards to the cart
         shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Menu";
 
         // Filters away
@@ -150,9 +152,10 @@ function cartShow() {
         title.className = 'shopping_cart';
         subText.innerText = "Klik op gerecht om het te verwijderen";
     }
-    currentPage = 0;
-    renderCards();
-    updatePaginationButtons();
+    currentPage = 0; // Reset to the first page
+    renderCards(); // Render the cards based on the current state
+    updatePaginationButtons(); // Update pagination buttons
+    updateCartCount(); // Update cart count display
 }
 
 // Function to handle filters
