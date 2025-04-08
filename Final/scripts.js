@@ -1,48 +1,46 @@
-let pageCardData
-let cardsData
-let filteredCards
-let dishes
-let drinks
-let deserts
-let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen']
-
+let pageCardData;
+let cardsData;
+let filteredCards;
+let dishes;
+let drinks;
+let deserts;
+let menuNames = ['Eten', 'Drinken', 'Toetjes', 'Winkelwagen'];
 
 let currentPage = 0;
 const itemsPerPage = 9;
 
 const prevButton = document.getElementById('prevPage');
 const nextButton = document.getElementById('nextPage');
-const title = document.getElementsByTagName("h1")[0]
-
+const title = document.getElementsByTagName("h1")[0];
 
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let cartActive = false
+let cartActive = false;
+
 fetch("products.JSON")
     .then((response) => {
         if (!response.ok) {
-            throw new Error(response.statusText)
+            throw new Error(response.statusText);
         }
-        return response.json()
+        return response.json();
     })
     .then(pageHandler)
-    .catch(error => console.log(error))
-
+    .catch(error => console.log(error));
 
 function pageHandler(data) {
-    dishes = data.dishes
-    drinks = data.drinks
-    deserts = data.deserts
+    dishes = data.dishes;
+    drinks = data.drinks;
+    deserts = data.deserts;
 
-    //if page= something =>
-    pageCardData = drinks
-    cardsData = pageCardData
-    filteredCards = cardsData
+    // Set initial page data
+    pageCardData = drinks;
+    cardsData = pageCardData;
+    filteredCards = cardsData;
 
     // Initial render
     renderCards();
-    activateFilters()
-    updatePaginationButtons()
+    activateFilters();
+    updatePaginationButtons();
 }
 
 // Function to render cards
@@ -70,36 +68,33 @@ function renderCards() {
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
-    alert(`${item.title} has been added to your cart!`);
+    updateCartCount(); // Update the cart count
 }
 
 function removeFromCart(item) {
-    cart.splice(cart.indexOf(item), 1)
+    cart.splice(cart.indexOf(item), 1);
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${item.title} has been removed from your cart!`);
-    //update de winkelwagen
-    renderCards()
-    updatePaginationButtons()
+    updateCartCount(); // Update the cart count
+    renderCards();
 }
 
-//cart showing functions
+// Cart showing functions
 const shoppingCart = document.getElementById('cartButton');
 shoppingCart.addEventListener('click', cartShow);
 
 function cartShow() {
-    // een toggle could shorten the entire thing, since it repeats code a lot and requires the listeners to be added again.
-    let filters = document.getElementsByClassName("filters")[0]
+    let filters = document.getElementsByClassName("filters")[0];
+    updateCartCount(); // Update the cart count display
     if (cartActive) {
-        cartActive = false
-        cardsData = pageCardData
-        filteredCards = cardsData
-        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
-            "                    Winkelwagen"
-        // filters terug
-        console.log(filters)
+        cartActive = false;
+        cardsData = pageCardData;
+        filteredCards = cardsData;
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Winkelwagen <span id=\"cartItemCount\" style=\"display: none;\">" + cart.length + "</span>";
+
+        // Filters back
         filters.innerHTML = "<button id=\"veganFilter\">\n" +
             "                        <i class=\"fa-solid fa-seedling buttonIcon\" style=\"color: #63E6BE;\"></i>\n" +
-            "                        vegatarisch\n" +
+            "                        vegetarisch\n" +
             "                    </button>\n" +
             "\n" +
             "                    <button id=\"lactoFreeFilter\">\n" +
@@ -115,33 +110,32 @@ function cartShow() {
             "                    <button id=\"nutFreeFilter\">\n" +
             "                        <i class=\"fa-solid fa-jar buttonIcon\" style=\"color: #bb854b;\"></i>\n" +
             "                        Notenvrij\n" +
-            "                    </button>"
-        // title update
+            "                    </button>";
+
+        // Title update
         for (let i = 0; i < 3; i++) {
-            const menus = [dishes, drinks, deserts]
+            const menus = [dishes, drinks, deserts];
             if (pageCardData === menus[i]) {
-                title.innerText = menuNames[i]
+                title.innerText = menuNames[i];
             }
         }
-        title.className = 'title'
-        activateFilters()
+        title.className = 'title';
+        activateFilters();
     } else {
-        cartActive = true
-        cardsData = cart
-        filteredCards = cart
-        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i>\n" +
-            "                    Menu"
-        // filters weg
-        filters.innerHTML = ""
-        // title update
-        title.innerText = 'Winkelwagen'
-        title.className = 'shopping_cart'
+        cartActive = true;
+        cardsData = cart;
+        filteredCards = cart;
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Menu <span id=\"cartItemCount\" style=\"display: inline;\">" + cart.length + "</span>";
 
+        // Filters away
+        filters.innerHTML = "";
 
+        // Title update
+        title.innerText = 'Winkelwagen';
+        title.className = 'shopping_cart';
     }
-    currentPage = 0
+    currentPage = 0;
     renderCards();
-    updatePaginationButtons()
 }
 
 // Function to handle filters
@@ -149,13 +143,13 @@ function applyFilters() {
     const veganFilter = document.getElementById('veganFilter').classList.contains('active');
     const lactoFreeFilter = document.getElementById('lactoFreeFilter').classList.contains('active');
     const glutenFreeFilter = document.getElementById('glutenFreeFilter').classList.contains('active');
-    const nutFreeFilter = document.getElementById('nutFreeFilter').classList.contains('active'); // New filter
+    const nutFreeFilter = document.getElementById('nutFreeFilter').classList.contains('active');
 
     filteredCards = cardsData.filter(card => {
         return (!veganFilter || card.vegan) &&
             (!lactoFreeFilter || card.lactoFree) &&
             (!glutenFreeFilter || card.glutenFree) &&
-            (!nutFreeFilter || card.nutFree); // Apply nut free filter
+            (!nutFreeFilter || card.nutFree);
     });
 
     currentPage = 0; // Reset to the first page after filtering
@@ -164,7 +158,7 @@ function applyFilters() {
 
 // Event listeners for filter buttons
 function activateFilters() {
-    let filters = ['veganFilter', 'lactoFreeFilter', 'glutenFreeFilter', 'nutFreeFilter']
+    let filters = ['veganFilter', 'lactoFreeFilter', 'glutenFreeFilter', 'nutFreeFilter'];
     for (const filter of filters) {
         document.getElementById(filter).addEventListener('click', function () {
             this.classList.toggle('active');
@@ -173,13 +167,10 @@ function activateFilters() {
     }
 }
 
-
 // Pagination functions
-
-// Disable buttons when necessary
 function updatePaginationButtons() {
-    prevButton.disabled = currentPage === 0 && (pageCardData === drinks || cardsData === cart);
-    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && (pageCardData === deserts || cardsData === cart);
+    prevButton.disabled = currentPage === 0 && pageCardData === drinks;
+    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && pageCardData === deserts;
 }
 
 // nextButton Event Handler
@@ -187,45 +178,57 @@ nextButton.addEventListener('click', function () {
     if ((currentPage + 1) * itemsPerPage < filteredCards.length) {
         currentPage++;
     } else {
-        //load next page
-        if (cardsData === dishes) {
-            pageCardData = deserts
-            title.innerText = menuNames[2]
+        // Load next page
+        if (pageCardData === dishes) {
+            pageCardData = deserts;
+            title.innerText = menuNames[2];
         }
-        if (cardsData === drinks) {
-            pageCardData = dishes
-            title.innerText = menuNames[0]
+        if (pageCardData === drinks) {
+            pageCardData = dishes;
+            title.innerText = menuNames[0];
         }
-        //update cardsData
-        cardsData = pageCardData
-        filteredCards = cardsData
-        // to first page of cardsData
-        currentPage = 0
+        // Update cardsData
+        cardsData = pageCardData;
+        filteredCards = cardsData;
+        // To first page of cardsData
+        currentPage = 0;
     }
-    updatePaginationButtons()
+    updatePaginationButtons();
     renderCards();
 });
+
 // prevButton Event Handler
 prevButton.addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage--;
     } else {
-        //load previous page
-        if (cardsData === dishes) {
-            pageCardData = drinks
-            title.innerText = menuNames[1]
+        // Load previous page
+        if (pageCardData === dishes) {
+            pageCardData = drinks;
+            title.innerText = menuNames[1];
         }
-        if (cardsData === deserts) {
-            pageCardData = dishes
-            title.innerText = menuNames[0]
+        if (pageCardData === deserts) {
+            pageCardData = dishes;
+            title.innerText = menuNames[0];
         }
-        //update cardsData
-        cardsData = pageCardData
-        filteredCards = cardsData
+        // Update cardsData
+        cardsData = pageCardData;
+        filteredCards = cardsData;
 
-        // to last page of cardsData
-        currentPage = Math.ceil(cardsData.length / itemsPerPage) - 1
+        // To last page of cardsData
+        currentPage = Math.ceil(cardsData.length / itemsPerPage) - 1;
     }
-    updatePaginationButtons()
+    updatePaginationButtons();
     renderCards();
 });
+
+// Function to update cart count display
+function updateCartCount() {
+    const cartItemCount = document.getElementById('cartItemCount');
+    const itemCount = cart.length; // Aantal items in de winkelwagen
+    cartItemCount.innerText = itemCount; // Update de tekst
+    cartItemCount.style.display = itemCount > 0 ? 'inline' : 'none'; // Toon of verberg de teller
+}
+
+// Bij het laden van de pagina, update de cart count
+updateCartCount();
