@@ -68,14 +68,19 @@ function renderCards() {
 function addToCart(item) {
     cart.push(item);
     localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
-    updateCartCount(); // Update the cart count
+    alert(`${item.title} is aan winkelwagen toegevoegd!`);
 }
 
 function removeFromCart(item) {
     cart.splice(cart.indexOf(item), 1);
     localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount(); // Update the cart count
+    alert(`${item.title} is uit winkelwagen verwijderd!`);
+
+    if (currentPage > 0 && currentPage * itemsPerPage >= cart.length) currentPage--;
+
+    // Update the cart
     renderCards();
+    updatePaginationButtons();
 }
 
 // Cart showing functions
@@ -84,33 +89,43 @@ shoppingCart.addEventListener('click', cartShow);
 
 function cartShow() {
     let filters = document.getElementsByClassName("filters")[0];
-    updateCartCount(); // Update the cart count display
+    let subText = document.getElementById("cartSubText");
+
+    if (!subText) {
+        subText = document.createElement("p");
+        subText.id = "cartSubText";
+        subText.className = "cart-subtext";
+        title.parentNode.insertBefore(subText, title.nextSibling);
+    }
+
     if (cartActive) {
         cartActive = false;
         cardsData = pageCardData;
         filteredCards = cardsData;
-        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Winkelwagen <span id=\"cartItemCount\" style=\"display: none;\">" + cart.length + "</span>";
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Winkelwagen";
+
+        if (subText) {
+            subText.remove();
+        }
 
         // Filters back
-        filters.innerHTML = "<button id=\"veganFilter\">\n" +
-            "                        <i class=\"fa-solid fa-seedling buttonIcon\" style=\"color: #63E6BE;\"></i>\n" +
-            "                        vegetarisch\n" +
-            "                    </button>\n" +
-            "\n" +
-            "                    <button id=\"lactoFreeFilter\">\n" +
-            "                        <i class=\"fa-solid fa-cheese buttonIcon\" style=\"color: #FFD43B;\"></i>\n" +
-            "                        Lactosevrij\n" +
-            "                    </button>\n" +
-            "\n" +
-            "                    <button id=\"glutenFreeFilter\">\n" +
-            "                        <i class=\"fa-solid fa-wheat-awn buttonIcon\" style=\"color: #FFD43B;\"></i>\n" +
-            "                        Glutenvrij\n" +
-            "                    </button>\n" +
-            "\n" +
-            "                    <button id=\"nutFreeFilter\">\n" +
-            "                        <i class=\"fa-solid fa-jar buttonIcon\" style=\"color: #bb854b;\"></i>\n" +
-            "                        Notenvrij\n" +
-            "                    </button>";
+        filters.innerHTML = `
+            <button id="veganFilter">
+                <i class="fa-solid fa-seedling buttonIcon" style="color: #63E6BE;"></i>
+                vegetarisch
+            </button>
+            <button id="lactoFreeFilter">
+                <i class="fa-solid fa-cheese buttonIcon" style="color: #FFD43B;"></i>
+                Lactosevrij
+            </button>
+            <button id="glutenFreeFilter">
+                <i class="fa-solid fa-wheat-awn buttonIcon" style="color: #FFD43B;"></i>
+                Glutenvrij
+            </button>
+            <button id="nutFreeFilter">
+                <i class="fa-solid fa-jar buttonIcon" style="color: #bb854b;"></i>
+                Notenvrij
+            </button>`;
 
         // Title update
         for (let i = 0; i < 3; i++) {
@@ -125,7 +140,7 @@ function cartShow() {
         cartActive = true;
         cardsData = cart;
         filteredCards = cart;
-        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Menu <span id=\"cartItemCount\" style=\"display: inline;\">" + cart.length + "</span>";
+        shoppingCart.innerHTML = "<i class=\"fa-solid fa-cart-shopping buttonIcon\" style=\"color: #ffffff;\"></i> Menu";
 
         // Filters away
         filters.innerHTML = "";
@@ -133,9 +148,11 @@ function cartShow() {
         // Title update
         title.innerText = 'Winkelwagen';
         title.className = 'shopping_cart';
+        subText.innerText = "Klik op gerecht om het te verwijderen";
     }
     currentPage = 0;
     renderCards();
+    updatePaginationButtons();
 }
 
 // Function to handle filters
@@ -169,8 +186,8 @@ function activateFilters() {
 
 // Pagination functions
 function updatePaginationButtons() {
-    prevButton.disabled = currentPage === 0 && pageCardData === drinks;
-    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && pageCardData === deserts;
+    prevButton.disabled = currentPage === 0 && (pageCardData === drinks || cardsData === cart);
+    nextButton.disabled = (currentPage + 1) * itemsPerPage >= filteredCards.length && (pageCardData === deserts || cardsData === cart);
 }
 
 // nextButton Event Handler
@@ -179,11 +196,11 @@ nextButton.addEventListener('click', function () {
         currentPage++;
     } else {
         // Load next page
-        if (pageCardData === dishes) {
+        if (cardsData === dishes) {
             pageCardData = deserts;
             title.innerText = menuNames[2];
         }
-        if (pageCardData === drinks) {
+        if (cardsData === drinks) {
             pageCardData = dishes;
             title.innerText = menuNames[0];
         }
@@ -203,11 +220,11 @@ prevButton.addEventListener('click', function () {
         currentPage--;
     } else {
         // Load previous page
-        if (pageCardData === dishes) {
+        if (cardsData === dishes) {
             pageCardData = drinks;
             title.innerText = menuNames[1];
         }
-        if (pageCardData === deserts) {
+        if (cardsData === deserts) {
             pageCardData = dishes;
             title.innerText = menuNames[0];
         }
