@@ -113,21 +113,24 @@ function cartShow() {
         // Filters back
         filters.innerHTML = `
             <button id="veganFilter">
-                <i class="fa-solid fa-seedling buttonIcon" style="color: #63E6BE;"></i>
-                vegetarisch
-            </button>
-            <button id="lactoFreeFilter">
-                <i class="fa-solid fa-cheese buttonIcon" style="color: #FFD43B;"></i>
-                Lactosevrij
-            </button>
-            <button id="glutenFreeFilter">
-                <i class="fa-solid fa-wheat-awn buttonIcon" style="color: #FFD43B;"></i>
-                Glutenvrij
-            </button>
-            <button id="nutFreeFilter">
-                <i class="fa-solid fa-jar buttonIcon" style="color: #bb854b;"></i>
-                Notenvrij
-            </button>`;
+                        <i class="fa-solid fa-seedling buttonIcon" style="color: #63E6BE;"></i>
+                        Vegetarisch
+                    </button>
+
+                    <button id="lactoFreeFilter">
+                        <i class="fa-solid fa-cheese buttonIcon" style="color: #FFD43B;"></i>
+                        Zonder Melk
+                    </button>
+
+                    <button id="glutenFreeFilter">
+                        <i class="fa-solid fa-wheat-awn buttonIcon" style="color: #FFD43B;"></i>
+                        Zonder Gluten
+                    </button>
+
+                    <button id="nutFreeFilter">
+                        <i class="fa-solid fa-jar buttonIcon" style="color: #bb854b;"></i>
+                        Zonder Noten
+                    </button>`;
 
         // Title update
         for (let i = 0; i < 3; i++) {
